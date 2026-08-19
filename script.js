@@ -784,62 +784,61 @@ Available Commands:
   });
 
   // ==========================================================================
-  // CV VIEWER MODAL & MULTI-STRATEGY DOWNLOAD SYSTEM
+  // CV VIEWER MODAL & MULTI-STRATEGY DOWNLOAD SYSTEM (GITHUB PAGES COMPATIBLE)
   // ==========================================================================
+  const STATIC_CV_PATH = './cv/Muraduzzaman_Asha_CV.pdf';
+  const CV_FILENAME = 'Muraduzzaman_Asha_CV.pdf';
   const cvViewerModalEl = document.getElementById('cvViewerModal');
   const btnModalDirectDownload = document.getElementById('btnModalDirectDownload');
   const btnModalCopyLink = document.getElementById('btnModalCopyLink');
   const btnModalNewTab = document.getElementById('btnModalNewTab');
 
   function triggerGuaranteedDownload() {
-    // Strategy 1: Fetch Base64 data and trigger direct Data-URI download
-    fetch('/api/cv-data')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.base64) {
-          const byteCharacters = atob(data.base64);
-          const byteNumbers = new Array(byteCharacters.length);
-          for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-          }
-          const byteArray = new Uint8Array(byteNumbers);
-          const blob = new Blob([byteArray], { type: 'application/pdf' });
-          const blobUrl = window.URL.createObjectURL(blob);
-          
-          const a = document.createElement('a');
-          a.style.display = 'none';
-          a.href = blobUrl;
-          a.download = data.filename || 'Muraduzzaman_Asha_CV.pdf';
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(() => {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(blobUrl);
-          }, 400);
-        }
+    // 1. Fetch static file as Blob (100% works on GitHub Pages, Netlify, Vercel, Localhost & Cloud Run)
+    fetch(STATIC_CV_PATH)
+      .then(res => {
+        if (!res.ok) throw new Error('Static fetch failed');
+        return res.blob();
+      })
+      .then(blob => {
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = CV_FILENAME;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(blobUrl);
+        }, 400);
       })
       .catch(() => {
-        // Fallback: window navigation
-        window.open('/download-cv', '_blank');
+        // Fallback: direct anchor navigation
+        const fallbackA = document.createElement('a');
+        fallbackA.href = STATIC_CV_PATH;
+        fallbackA.download = CV_FILENAME;
+        fallbackA.target = '_blank';
+        document.body.appendChild(fallbackA);
+        fallbackA.click();
+        document.body.removeChild(fallbackA);
       });
   }
 
   // Navbar and Hero CV click handlers
-  const cvTriggers = document.querySelectorAll('a[href="/download-cv"], #heroDownloadCvBtn');
+  const cvTriggers = document.querySelectorAll('a[href*="Muraduzzaman_Asha_CV.pdf"], a[href*="download-cv"], #heroDownloadCvBtn');
   cvTriggers.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      // 1. Show interactive CV Hub Modal
+      // Show interactive CV Hub Modal if present
       if (cvViewerModalEl && typeof bootstrap !== 'undefined') {
         const bsModal = bootstrap.Modal.getOrCreateInstance(cvViewerModalEl);
         bsModal.show();
       }
 
-      // 2. Trigger instant download
+      // Trigger instant download
       triggerGuaranteedDownload();
 
-      // 3. Button feedback
+      // Visual feedback
       const originalHtml = btn.innerHTML;
       btn.innerHTML = '<i class="fas fa-check-circle text-success me-1"></i> Opening CV...';
       setTimeout(() => {
@@ -863,10 +862,10 @@ Available Commands:
     });
   }
 
-  // Modal Toolbar: Copy Link button
+  // Modal Toolbar: Copy Link button (resolves exact absolute URL on GitHub Pages)
   if (btnModalCopyLink) {
     btnModalCopyLink.addEventListener('click', () => {
-      const fullUrl = window.location.origin + '/download-cv';
+      const fullUrl = new URL(STATIC_CV_PATH, window.location.href).href;
       navigator.clipboard.writeText(fullUrl).then(() => {
         const origText = btnModalCopyLink.innerHTML;
         btnModalCopyLink.innerHTML = '<i class="fas fa-check text-success me-1"></i> Copied!';
