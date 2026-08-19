@@ -1956,19 +1956,28 @@
           </div>
 
           <div class="modal-cyber-body p-3">
+            <!-- Helpful Tip for iframe sandbox download -->
+            <div class="d-flex align-items-center justify-content-between p-2 px-3 mb-3 rounded font-mono small" style="background: rgba(56, 189, 248, 0.08); border: 1px solid var(--border-accent);">
+              <div>
+                <i class="fas fa-hard-drive text-cyan me-2"></i>
+                <span class="text-bright">Click <strong>"Save to Local Disk"</strong> to download directly to your device storage.</span>
+              </div>
+              <span class="badge bg-dark text-cyan border border-secondary d-none d-md-inline">175 KB &bull; PDF 1.7</span>
+            </div>
+
             <!-- CV Actions & Download Toolbar -->
             <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center p-3 mb-3 rounded" style="background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-subtle);">
               <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-success font-mono"><i class="fas fa-shield-alt me-1"></i> PDF 1.7 READY</span>
-                <span class="text-secondary small font-mono d-none d-md-inline">Muraduzzaman_Asha_CV.pdf</span>
+                <span class="badge bg-success font-mono"><i class="fas fa-shield-alt me-1"></i> VERIFIED PDF</span>
+                <span class="text-secondary small font-mono d-none d-lg-inline">Muraduzzaman_Asha_CV.pdf</span>
               </div>
               <div class="d-flex flex-wrap gap-2">
-                <button type="button" class="btn btn-cyber-primary btn-sm" id="btnModalDirectDownload">
-                  <i class="fas fa-download me-1"></i> Download PDF
-                </button>
-                <a href="/download-cv" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-secondary btn-sm" id="btnModalNewTab">
-                  <i class="fas fa-external-link-alt me-1"></i> Open in New Tab
+                <a href="/download-cv" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm" id="btnModalNewTab">
+                  <i class="fas fa-file-arrow-down me-1"></i> Save to Local Disk
                 </a>
+                <button type="button" class="btn btn-cyber-secondary btn-sm" id="btnModalDirectDownload">
+                  <i class="fas fa-download me-1"></i> Direct Download
+                </button>
                 <button type="button" class="btn btn-cyber-outline btn-sm" id="btnModalCopyLink">
                   <i class="fas fa-copy me-1"></i> Copy Link
                 </button>
