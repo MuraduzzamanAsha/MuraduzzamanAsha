@@ -33,7 +33,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Muraduzzaman Asha | Cyber Security | Blue Team | SOC | SIEM" />
     <meta property="og:description" content="Aspiring Cybersecurity Engineer with hands-on experience across 120+ TryHackMe rooms, CTF finalist achievements, security automation, and SOC/SIEM learning." />
-    <meta property="og:image" content="./gallery/muraduzzamanasha.jpg" />
+    <meta property="og:image" content="./profile/muraduzzamanasha.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -128,8 +128,8 @@
                 <a class="nav-link" href="#contact">Contact</a>
               </li>
               <li class="nav-item ms-xl-2 mt-2 mt-xl-0">
-                <a href="#contact" class="btn btn-nav-action">
-                  <i class="fas fa-file-download me-1"></i> CV / Contact
+                <a href="/download-cv" download="Muraduzzaman_Asha_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-nav-action">
+                  <i class="fas fa-file-download me-1"></i> Download CV
                 </a>
               </li>
             </ul>
@@ -173,8 +173,8 @@
                 <a href="#projects" class="btn btn-cyber-primary">
                   <i class="fas fa-terminal"></i> Explore My Work
                 </a>
-                <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-secondary">
-                  <i class="fab fa-github"></i> View GitHub
+                <a href="/download-cv" download="Muraduzzaman_Asha_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-secondary" id="heroDownloadCvBtn">
+                  <i class="fas fa-file-arrow-down"></i> Download CV
                 </a>
                 <a href="#contact" class="btn btn-cyber-outline">
                   <i class="fas fa-envelope"></i> Get In Touch
@@ -205,15 +205,70 @@
                   <span class="text-success"><i class="fas fa-circle font-xs me-1"></i> ONLINE</span>
                 </div>
 
-                <div class="hud-image-wrapper">
-                  <img
-                    src="./gallery/muraduzzamanasha.jpg"
-                    alt="Muraduzzaman Asha - Cybersecurity Professional"
-                    class="hud-profile-img"
-                  />
-                  <div class="hud-overlay-badge">
+                <div class="hud-image-wrapper" id="hudSliderWrapper">
+                  <div class="hud-radar-sweep"></div>
+                  
+                  <!-- Rotational Profile Slides -->
+                  <div class="hud-slides-container" id="hudSlidesContainer">
+                    <!-- Slide 1: Main Portrait (Original Single Photo) -->
+                    <div class="hud-slide active" data-caption="OPERATOR: MURADUZZAMAN" data-badge="PRIMARY PROFILE">
+                      <img
+                        src="./profile/muraduzzamanasha.jpg?v=2026"
+                        alt="Muraduzzaman Asha - Cybersecurity Professional"
+                        class="hud-profile-img"
+                      />
+                    </div>
+                    <!-- Slide 2: HackerOne Bug Hunt 2026 -->
+                    <div class="hud-slide" data-caption="HACKERONE BUG HUNT 2026" data-badge="BUG BOUNTY BANGLADESH">
+                      <img
+                        src="./profile/IMG_20260111_223847.jpg?v=2026"
+                        alt="Muraduzzaman Asha at HackerOne Bug Hunt 2026"
+                        class="hud-profile-img"
+                      />
+                    </div>
+                    <!-- Slide 3: Phoenix Cyber Security Summit 2026 -->
+                    <div class="hud-slide" data-caption="PHOENIX CYBER SECURITY SUMMIT" data-badge="NATIONAL SUMMIT 2026">
+                      <img
+                        src="./profile/IMG_20260627_220541.jpg?v=2026"
+                        alt="Muraduzzaman Asha at Phoenix Cyber Security Summit 2026"
+                        class="hud-profile-img"
+                      />
+                    </div>
+                    <!-- Slide 4: Outdoor / Field Journey -->
+                    <div class="hud-slide" data-caption="EXPEDITION &amp; FIELD ACTIVITIES" data-badge="FIELD EXPEDITION">
+                      <img
+                        src="./profile/IMG-20260124-WA0000.jpg?v=2026"
+                        alt="Muraduzzaman Asha - Outdoor Expedition"
+                        class="hud-profile-img"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Dynamic HUD Overlay Badge -->
+                  <div class="hud-overlay-badge" id="hudOverlayBadge">
                     <i class="fas fa-user-shield text-cyan"></i>
-                    <span>OPERATOR: MURADUZZAMAN</span>
+                    <span id="hudBadgeText">OPERATOR: MURADUZZAMAN</span>
+                  </div>
+
+                  <!-- Manual Navigation & Indicators -->
+                  <div class="hud-slider-controls">
+                    <button type="button" class="hud-slide-nav-btn" id="hudPrevSlideBtn" aria-label="Previous Profile Picture">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="hud-slide-dots" id="hudSlideDots">
+                      <span class="hud-dot active" data-slide-index="0" title="Slide 1"></span>
+                      <span class="hud-dot" data-slide-index="1" title="Slide 2"></span>
+                      <span class="hud-dot" data-slide-index="2" title="Slide 3"></span>
+                      <span class="hud-dot" data-slide-index="3" title="Slide 4"></span>
+                    </div>
+                    <button type="button" class="hud-slide-nav-btn" id="hudNextSlideBtn" aria-label="Next Profile Picture">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+
+                  <!-- 5s Auto-Rotation Progress Bar -->
+                  <div class="hud-rotation-progress">
+                    <div class="hud-rotation-progress-bar animate" id="hudRotationProgressBar"></div>
                   </div>
                 </div>
 
@@ -1118,21 +1173,49 @@
             </div>
           </div>
 
-          <!-- Local Photo Integration -->
+          <!-- Interactive CTF Flag Decryption Challenge -->
+          <div class="row">
+            <div class="col-12">
+              <div class="ctf-challenge-box">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fas fa-terminal text-cyan"></i>
+                  <h4 class="h6 mb-0 text-bright font-mono">ACTIVE CTF CHALLENGE: REVERSE & DECODE PAYLOAD</h4>
+                </div>
+                <p class="text-secondary small mb-2">
+                  An encrypted reconnaissance beacon string was captured from an unauthorized IP. Decode the Base64 ciphertext below to extract the valid CTF flag:
+                </p>
+                <div class="ctf-cipher-display">
+                  <span>VEhNcntNVVJBRF9TRUNVUklUWV9FTkdJTkVFUl9ERVZfMjAyNn0=</span>
+                  <button type="button" id="ctfQuickDecodeBtn" class="btn btn-cyber-primary btn-sm py-1 px-2 font-mono">
+                    <i class="fas fa-magic me-1"></i> Auto-Decode
+                  </button>
+                </div>
+                <div class="ctf-decode-interactive-row">
+                  <input type="text" id="ctfFlagInput" class="ctf-flag-input" placeholder="Submit flag format: THM{...}" />
+                  <button type="button" id="ctfVerifyFlagBtn" class="btn btn-cyber-secondary btn-sm py-2 px-3 font-mono">
+                    <i class="fas fa-flag-checkered me-1"></i> Submit Flag
+                  </button>
+                </div>
+                <div id="ctfResultBadge" class="ctf-result-badge"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cybersecurity Event Photos -->
           <div class="row g-4 mt-3">
             <div class="col-md-6">
               <div class="ctf-gallery-img-wrapper">
-                <img src="./gallery/photo1.jpg" alt="Team Work & Academic Journey" class="ctf-gallery-img" />
+                <img src="./profile/IMG_20260111_223847.jpg?v=2026" alt="HackerOne Bug Hunt Bangladesh 2026" class="ctf-gallery-img" />
                 <div class="ctf-img-caption">
-                  <i class="fas fa-users text-cyan me-1"></i> Collaborative Team Projects & Academic Activities &bull; MBSTU
+                  <i class="fas fa-shield-alt text-cyan me-1"></i> HackerOne Bug Hunt 2026 &bull; Bug Bounty Community Bangladesh
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="ctf-gallery-img-wrapper">
-                <img src="./gallery/photo2.jpg" alt="CTF Competition & Technical Participation" class="ctf-gallery-img" />
+                <img src="./profile/IMG_20260627_220541.jpg?v=2026" alt="Phoenix Cyber Security Summit 2026" class="ctf-gallery-img" />
                 <div class="ctf-img-caption">
-                  <i class="fas fa-laptop-code text-cyan me-1"></i> Technical Preparation & Competitive Problem Solving
+                  <i class="fas fa-network-wired text-cyan me-1"></i> Phoenix Summit Dhaka 2026 &bull; Biggest Cyber Security Event
                 </div>
               </div>
             </div>
@@ -1284,6 +1367,85 @@
                     </ul>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Syslog & Telemetry Streamer -->
+          <div class="soc-streamer-box">
+            <div class="soc-streamer-header">
+              <span><i class="fas fa-wave-square text-cyan me-1"></i> LIVE SECURITY EVENT STREAM (SURICATA &bull; ZEEK &bull; AUDITD)</span>
+              <span class="text-success"><i class="fas fa-circle font-xs me-1"></i> INGESTING</span>
+            </div>
+            <div id="socStreamerLogs" class="soc-streamer-logs">
+              <div class="stream-log-entry">
+                <span class="text-muted">14:34:02</span>
+                <span class="log-tag firewall">firewall</span>
+                <span class="text-secondary">ALLOW IN=eth1 OUT=eth0 SRC=10.0.8.44 DST=10.0.2.15 PROTO=TCP SPT=55230 DPT=443</span>
+              </div>
+              <div class="stream-log-entry">
+                <span class="text-muted">14:34:08</span>
+                <span class="log-tag suricata">suricata</span>
+                <span class="text-secondary">ET SCAN Potential Nmap User-Agent Detected 192.168.10.105 -> 10.0.1.25</span>
+              </div>
+              <div class="stream-log-entry">
+                <span class="text-muted">14:34:15</span>
+                <span class="log-tag zeek">zeek</span>
+                <span class="text-secondary">HTTP 401 Unauthorized /api/v1/auth/session - X-Forwarded-For: 203.0.113.88</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MITRE ATT&CK Matrix Explorer -->
+          <div class="mitre-matrix-container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+              <div>
+                <h4 class="h6 mb-0 text-bright font-mono"><i class="fas fa-th-large text-teal me-1"></i> MITRE ATT&CK ENTERPRISE MATRIX NAVIGATOR</h4>
+                <div class="text-muted font-mono small">Click any technique pill to load detection playbook & mitigation guidelines</div>
+              </div>
+              <span class="badge bg-dark text-cyan border border-secondary font-mono">FRAMEWORK: v14</span>
+            </div>
+
+            <div class="mitre-tactic-grid">
+              <div class="mitre-tactic-col">
+                <div class="mitre-tactic-header">Initial Access</div>
+                <div class="mitre-technique-pill active" data-tech-id="T1190">T1190: Exploit Public App</div>
+              </div>
+
+              <div class="mitre-tactic-col">
+                <div class="mitre-tactic-header">Credential Access</div>
+                <div class="mitre-technique-pill" data-tech-id="T1110">T1110: Password Guessing</div>
+              </div>
+
+              <div class="mitre-tactic-col">
+                <div class="mitre-tactic-header">Execution</div>
+                <div class="mitre-technique-pill" data-tech-id="T1059">T1059.001: PowerShell</div>
+              </div>
+
+              <div class="mitre-tactic-col">
+                <div class="mitre-tactic-header">Privilege Escalation</div>
+                <div class="mitre-technique-pill" data-tech-id="T1548">T1548.003: Sudo Caching</div>
+              </div>
+
+              <div class="mitre-tactic-col">
+                <div class="mitre-tactic-header">Discovery</div>
+                <div class="mitre-technique-pill" data-tech-id="T1046">T1046: Network Discovery</div>
+              </div>
+            </div>
+
+            <div id="mitreInspectorPanel" class="mitre-inspector-panel visible">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-cyan font-bold">T1190 - Exploit Public-Facing Application</span>
+                <span class="badge bg-dark text-teal border border-secondary">Initial Access</span>
+              </div>
+              <p class="text-secondary small mb-2">Adversaries exploit software vulnerabilities in internet-facing web apps, servers, or APIs to execute arbitrary code or gain an initial foothold.</p>
+              <div class="mb-2">
+                <strong class="text-warning small"><i class="fas fa-radar me-1"></i> Detection Playbook:</strong>
+                <div class="text-muted small">Inspect web application firewall (WAF) anomaly alerts, audit HTTP status 500 error spikes, and enable parameterized SQL query enforcement.</div>
+              </div>
+              <div>
+                <strong class="text-success small"><i class="fas fa-shield-alt me-1"></i> Mitigation:</strong>
+                <div class="text-muted small">Implement strict input validation, automated vulnerability scanning (Burp/OWASP ZAP), and regular software patch cycles.</div>
               </div>
             </div>
           </div>
@@ -1696,6 +1858,41 @@
       <i class="fas fa-arrow-up"></i>
     </a>
 
+    <!-- Interactive Floating Cyber CLI Button -->
+    <button type="button" id="cyberCliToggleBtn" class="cyber-cli-toggle-btn" aria-label="Open Cyber CLI">
+      <i class="fas fa-terminal"></i> <span>&gt;_ CLI Shell</span>
+    </button>
+
+    <!-- Floating Cyber CLI Drawer -->
+    <div id="cyberCliDrawer" class="cyber-cli-drawer" role="dialog" aria-label="Cybersecurity Command Line Interface">
+      <div class="cli-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="cli-window-controls">
+            <span class="cli-dot red" id="cliCloseDot" title="Close CLI"></span>
+            <span class="cli-dot yellow"></span>
+            <span class="cli-dot green"></span>
+          </div>
+          <span>operator@mbstu-sec-node:~</span>
+        </div>
+        <span class="badge bg-dark text-cyan border border-secondary font-xs">BASH / SHELL</span>
+      </div>
+
+      <div class="cli-output-area" id="cliOutputArea">
+        <div class="cli-output-line system-msg">
+          =======================================================<br>
+          MURADUZZAMAN ASHA &bull; CYBERSECURITY INTERACTIVE SHELL v2.4<br>
+          Type <span class="highlight-msg">help</span> to view available security commands.<br>
+          Try: <span class="highlight-msg">whoami</span>, <span class="highlight-msg">skills</span>, <span class="highlight-msg">projects</span>, <span class="highlight-msg">soc</span>, <span class="highlight-msg">ctf</span>, <span class="highlight-msg">matrix</span><br>
+          =======================================================
+        </div>
+      </div>
+
+      <div class="cli-input-wrapper">
+        <span class="cli-input-prompt">visitor@sec-hub:~$</span>
+        <input type="text" id="cliInputField" class="cli-input-field" placeholder="Type a command (e.g., help, whoami, soc)..." autocomplete="off" spellcheck="false" />
+      </div>
+    </div>
+
     <!-- ==========================================================================
          PROJECT DETAIL MODAL
          ========================================================================== -->
@@ -1737,6 +1934,61 @@
             <a href="#" id="modalProjectGithub" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
               <i class="fab fa-github me-1"></i> View Repository
             </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         CV VIEWER & DOWNLOAD HUB MODAL
+         ========================================================================== -->
+    <div class="modal fade" id="cvViewerModal" tabindex="-1" aria-labelledby="cvModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content modal-cyber-content">
+          <div class="modal-cyber-header d-flex justify-content-between align-items-center">
+            <div>
+              <span class="badge bg-dark text-cyan font-mono border border-secondary mb-1">
+                <i class="fas fa-file-pdf text-danger me-1"></i> VERIFIED OPERATOR RESUME (175 KB)
+              </span>
+              <h3 class="modal-title h5 text-bright" id="cvModalLabel">Muraduzzaman Asha — Curriculum Vitae</h3>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-cyber-body p-3">
+            <!-- CV Actions & Download Toolbar -->
+            <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center p-3 mb-3 rounded" style="background: rgba(15, 23, 42, 0.85); border: 1px solid var(--border-subtle);">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-success font-mono"><i class="fas fa-shield-alt me-1"></i> PDF 1.7 READY</span>
+                <span class="text-secondary small font-mono d-none d-md-inline">Muraduzzaman_Asha_CV.pdf</span>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-cyber-primary btn-sm" id="btnModalDirectDownload">
+                  <i class="fas fa-download me-1"></i> Download PDF
+                </button>
+                <a href="/download-cv" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-secondary btn-sm" id="btnModalNewTab">
+                  <i class="fas fa-external-link-alt me-1"></i> Open in New Tab
+                </a>
+                <button type="button" class="btn btn-cyber-outline btn-sm" id="btnModalCopyLink">
+                  <i class="fas fa-copy me-1"></i> Copy Link
+                </button>
+              </div>
+            </div>
+
+            <!-- PDF Embedded Frame / Viewer -->
+            <div class="cv-embed-container" style="position: relative; width: 100%; height: 68vh; min-height: 480px; background: #1e293b; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-subtle);">
+              <iframe
+                id="cvModalPdfIframe"
+                src="/cv/Muraduzzaman_Asha_CV.pdf"
+                style="width: 100%; height: 100%; border: none;"
+                title="Muraduzzaman Asha CV PDF Viewer"
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="modal-cyber-footer d-flex justify-content-between align-items-center">
+            <span class="text-muted small font-mono">B.Sc. in ICT &bull; Cybersecurity & SOC Specialist</span>
+            <button type="button" class="btn btn-cyber-outline btn-sm" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

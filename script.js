@@ -60,6 +60,116 @@ document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.querySelector('.navbar-custom');
   const backToTopBtn = document.getElementById('backToTopBtn');
 
+  // ==========================================================================
+  // PROFILE HUD 5-SECOND ROTATIONAL SLIDESHOW
+  // ==========================================================================
+  const hudSlides = document.querySelectorAll('.hud-slide');
+  const hudDots = document.querySelectorAll('.hud-dot');
+  const hudBadgeText = document.getElementById('hudBadgeText');
+  const hudPrevBtn = document.getElementById('hudPrevSlideBtn');
+  const hudNextBtn = document.getElementById('hudNextSlideBtn');
+  const hudProgressBar = document.getElementById('hudRotationProgressBar');
+  const hudSliderWrapper = document.getElementById('hudSliderWrapper');
+
+  if (hudSlides.length > 0) {
+    let currentSlideIdx = 0;
+    let rotationInterval = null;
+    const ROTATION_DELAY = 5000; // Exactly 5 seconds
+
+    function showSlide(idx) {
+      if (idx < 0) idx = hudSlides.length - 1;
+      if (idx >= hudSlides.length) idx = 0;
+
+      hudSlides.forEach((slide, i) => {
+        if (i === idx) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      hudDots.forEach((dot, i) => {
+        if (i === idx) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      const activeSlide = hudSlides[idx];
+      if (activeSlide && hudBadgeText) {
+        const caption = activeSlide.getAttribute('data-caption') || 'OPERATOR: MURADUZZAMAN';
+        hudBadgeText.textContent = caption;
+      }
+
+      currentSlideIdx = idx;
+      resetProgressBar();
+    }
+
+    function resetProgressBar() {
+      if (hudProgressBar) {
+        hudProgressBar.classList.remove('animate');
+        void hudProgressBar.offsetWidth; // Trigger reflow
+        hudProgressBar.classList.add('animate');
+      }
+    }
+
+    function startRotation() {
+      stopRotation();
+      resetProgressBar();
+      rotationInterval = setInterval(() => {
+        showSlide(currentSlideIdx + 1);
+      }, ROTATION_DELAY);
+    }
+
+    function stopRotation() {
+      if (rotationInterval) {
+        clearInterval(rotationInterval);
+        rotationInterval = null;
+      }
+    }
+
+    if (hudPrevBtn) {
+      hudPrevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSlide(currentSlideIdx - 1);
+        startRotation();
+      });
+    }
+
+    if (hudNextBtn) {
+      hudNextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSlide(currentSlideIdx + 1);
+        startRotation();
+      });
+    }
+
+    hudDots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSlide(i);
+        startRotation();
+      });
+    });
+
+    if (hudSliderWrapper) {
+      hudSliderWrapper.addEventListener('mouseenter', () => {
+        stopRotation();
+        if (hudProgressBar) hudProgressBar.style.animationPlayState = 'paused';
+      });
+
+      hudSliderWrapper.addEventListener('mouseleave', () => {
+        if (hudProgressBar) hudProgressBar.style.animationPlayState = 'running';
+        startRotation();
+      });
+    }
+
+    // Initialize first slide and begin 5s rotation
+    showSlide(0);
+    startRotation();
+  }
+
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
 
@@ -377,4 +487,396 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 800);
     });
   }
+
+  // ==========================================================================
+  // 10. INTERACTIVE CYBER CLI TERMINAL
+  // ==========================================================================
+  const cliToggleBtn = document.getElementById('cyberCliToggleBtn');
+  const cliDrawer = document.getElementById('cyberCliDrawer');
+  const cliCloseDot = document.getElementById('cliCloseDot');
+  const cliOutput = document.getElementById('cliOutputArea');
+  const cliInput = document.getElementById('cliInputField');
+
+  if (cliToggleBtn && cliDrawer) {
+    cliToggleBtn.addEventListener('click', () => {
+      cliDrawer.classList.toggle('open');
+      if (cliDrawer.classList.contains('open')) {
+        setTimeout(() => cliInput && cliInput.focus(), 150);
+      }
+    });
+
+    if (cliCloseDot) {
+      cliCloseDot.addEventListener('click', () => {
+        cliDrawer.classList.remove('open');
+      });
+    }
+  }
+
+  const cliCommands = {
+    'help': () => `
+Available Commands:
+  - <span class="highlight-msg">whoami</span>       : Display operator profile & bio
+  - <span class="highlight-msg">skills</span>       : List categorized cybersecurity skill stack
+  - <span class="highlight-msg">projects</span>     : Print featured security engineering projects
+  - <span class="highlight-msg">soc</span>          : Inspect live SOC monitoring status & active alerts
+  - <span class="highlight-msg">ctf</span>          : View CTF achievements & competition highlights
+  - <span class="highlight-msg">matrix</span>       : Print MITRE ATT&CK framework coverage
+  - <span class="highlight-msg">contact</span>      : Show direct contact channels & email
+  - <span class="highlight-msg">clear</span>        : Clear the terminal console
+  - <span class="highlight-msg">banner</span>       : Display ASCII security banner
+`,
+    'whoami': () => `
+[+] OPERATOR IDENTIFICATION:
+  Name      : Muraduzzaman Asha
+  Role      : Aspiring Cyber Security Engineer / Blue Team Analyst
+  Education : B.Sc. in ICT (CGPA 3.56/4.00), MBSTU (Graduated June 2026)
+  Location  : Tangail, Bangladesh
+  Core Motto: "Breaking systems to understand them. Building skills to defend them."
+`,
+    'skills': () => `
+[+] CLASSIFIED SECURITY STACK:
+  * Offensive : Burp Suite, Nmap, Metasploit, LinPEAS, Rustscan, Gobuster
+  * Blue Team : SOC Operations, SIEM Concepts, Log Analysis, Incident Triage
+  * Web & API : OWASP Top 10, SQLi, XSS, Auth Bypasses, JWT Testing
+  * Network   : Wireshark, TCP/IP, DNS, HTTP/S, SSH, FTP, SMB, VPN
+  * Systems   : Kali Linux, Ubuntu Server, Windows 10/11, VirtualBox
+  * Scripting : Python, PowerShell, Bash, C/C++, Git
+`,
+    'projects': () => `
+[+] FEATURED PROJECTS:
+  1. CyberJobBot           : Automated PowerShell Telegram security job intel daemon
+  2. THM & VulnHub Portfolio: 120+ hands-on pentesting & privesc lab writeups
+  3. Home Pentest Lab      : Isolated multi-VM offensive & defensive testing range
+  4. Malicious Package RS  : Static code analysis & ML for supply chain defense
+`,
+    'soc': () => `
+[+] SOC DEFENSE TELEMETRY:
+  * Status          : SENSOR CLUSTER 04 ONLINE
+  * 24h Event Volume: 148,290 events parsed
+  * Active Queue    : 4 High/Critical alerts in triage queue
+  * MTTR Target     : < 4.2 minutes
+  * Framework       : MITRE ATT&CK Enterprise Matrix v14
+`,
+    'ctf': () => `
+[+] CTF COMPETITION RECORD:
+  * EWU National RoboFest 2026 : 6th Place Grand Finale (Team Bit Bakers)
+  * Cybernauts 2026 CTF        : Grand Finale Representative for MBSTU
+  * TryHackMe Global Ranking   : Top 3% Worldwide (120+ Rooms Solved)
+`,
+    'matrix': () => `
+[+] MITRE ATT&CK MATRIX COVERAGE:
+  * T1190    : Exploit Public-Facing Application (Web/API)
+  * T1110    : Brute Force (SSH / HTTP Auth)
+  * T1059.001: Command & Scripting: PowerShell
+  * T1046    : Network Service Discovery (Nmap Scans)
+  * T1548    : Abuse Elevation Control Mechanism (SUID/Sudoers)
+`,
+    'contact': () => `
+[+] DIRECT TRANSMISSION CHANNELS:
+  * Email    : muraduzzamanasha.job@gmail.com
+  * GitHub   : https://github.com/Murad734138
+  * LinkedIn : https://www.linkedin.com/in/muraduzzaman-asha-9706772b0
+  * TryHackMe: https://tryhackme.com
+`,
+    'banner': () => `
+  __  __ _   _ ____      _    ____  
+ |  \\/  | | | |  _ \\    / \\  |  _ \\ 
+ | |\\/| | | | | |_) |  / _ \\ | | | |
+ | |  | | |_| |  _ <  / ___ \\| |_| |
+ |_|  |_|\\___/|_| \\_\\/_/   \\_\\____/ 
+ [ MURADUZZAMAN ASHA &bull; CYBERSECURITY &bull; SOC &bull; BLUE TEAM ]
+`,
+    'date': () => `[+] SYSTEM TIME: ${new Date().toUTCString()}`,
+    'clear': () => 'CLEAR'
+  };
+
+  if (cliInput && cliOutput) {
+    cliInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const rawCmd = cliInput.value.trim();
+        const cmd = rawCmd.toLowerCase();
+        cliInput.value = '';
+
+        if (!rawCmd) return;
+
+        // Print entered command
+        const userLine = document.createElement('div');
+        userLine.className = 'cli-output-line cmd-prompt';
+        userLine.innerHTML = `<span style="color:var(--text-muted)">visitor@sec-hub:~$</span> ${escapeHtml(rawCmd)}`;
+        cliOutput.appendChild(userLine);
+
+        if (cmd === 'clear') {
+          cliOutput.innerHTML = `
+            <div class="cli-output-line system-msg">
+              Muraduzzaman Asha [Cybersecurity Interactive CLI v2.4]<br>
+              Type <span class="highlight-msg">help</span> for a list of available security commands.
+            </div>
+          `;
+          return;
+        }
+
+        const responseHandler = cliCommands[cmd];
+        const resLine = document.createElement('div');
+        resLine.className = 'cli-output-line';
+
+        if (responseHandler) {
+          resLine.innerHTML = responseHandler();
+        } else {
+          resLine.className = 'cli-output-line error-msg';
+          resLine.innerHTML = `Command not recognized: "${escapeHtml(rawCmd)}". Type <span class="highlight-msg">help</span> for valid commands.`;
+        }
+
+        cliOutput.appendChild(resLine);
+        cliOutput.scrollTop = cliOutput.scrollHeight;
+      }
+    });
+  }
+
+  function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  }
+
+  // ==========================================================================
+  // 11. LIVE SOC SYSLOG & TELEMETRY STREAMER
+  // ==========================================================================
+  const syslogStreamContainer = document.getElementById('socStreamerLogs');
+  const sampleLogs = [
+    { tag: 'suricata', text: 'ET SCAN Potential Nmap User-Agent Detected [Classification: Reconnaissance] 192.168.10.105:43920 -> 10.0.1.25:80' },
+    { tag: 'zeek', text: 'HTTP 401 Unauthorized /api/v1/auth/session - Suspicious header X-Forwarded-For: 203.0.113.88' },
+    { tag: 'firewall', text: 'DROP IN=eth0 OUT= MAC=52:54:00:12:34:56 SRC=198.51.100.42 DST=10.0.4.12 PROTO=TCP SPT=49152 DPT=22' },
+    { tag: 'auditd', text: 'type=EXECVE msg=audit(1724067200.412:891): argc=3 a0="sudo" a1="-l" a2="root" cwd="/var/tmp" comm="sudo"' },
+    { tag: 'zeek', text: 'DNS query ANY _ldap._tcp.dc._msdcs.corp.local -> returned 0 records (Active Directory Recon)' },
+    { tag: 'suricata', text: 'ET WEB_SERVER SQL Injection Attempt detected in URI parameter "id=1\' OR \'1\'=\'1"' },
+    { tag: 'auditd', text: 'type=SYSCALL arch=c000003e syscall=59 success=yes pid=4108 exe="/usr/bin/powershell" key="susp_shell"' },
+    { tag: 'firewall', text: 'ALLOW IN=eth1 OUT=eth0 SRC=10.0.8.44 DST=10.0.2.15 PROTO=TCP SPT=55230 DPT=443 (TLS v1.3)' }
+  ];
+
+  if (syslogStreamContainer) {
+    let logIndex = 0;
+    setInterval(() => {
+      const item = sampleLogs[logIndex % sampleLogs.length];
+      logIndex++;
+
+      const logRow = document.createElement('div');
+      logRow.className = 'stream-log-entry';
+      const timeStr = new Date().toISOString().substring(11, 19);
+
+      logRow.innerHTML = `
+        <span class="text-muted">${timeStr}</span>
+        <span class="log-tag ${item.tag}">${item.tag}</span>
+        <span class="text-secondary">${item.text}</span>
+      `;
+
+      syslogStreamContainer.appendChild(logRow);
+
+      // Keep maximum 6 lines
+      while (syslogStreamContainer.children.length > 6) {
+        syslogStreamContainer.removeChild(syslogStreamContainer.firstChild);
+      }
+    }, 3200);
+  }
+
+  // ==========================================================================
+  // 12. CTF CIPHER & FLAG DECODER CHALLENGE
+  // ==========================================================================
+  const ctfDecodeBtn = document.getElementById('ctfQuickDecodeBtn');
+  const ctfVerifyBtn = document.getElementById('ctfVerifyFlagBtn');
+  const ctfInput = document.getElementById('ctfFlagInput');
+  const ctfResult = document.getElementById('ctfResultBadge');
+  const correctFlag = 'THM{MURAD_SECURITY_ENGINEER_DEV_2026}';
+
+  if (ctfDecodeBtn && ctfInput) {
+    ctfDecodeBtn.addEventListener('click', () => {
+      ctfInput.value = correctFlag;
+      if (ctfResult) {
+        ctfResult.className = 'ctf-result-badge success';
+        ctfResult.innerHTML = '<i class="fas fa-check-circle me-1"></i> [PAYLOAD DECODED &amp; VERIFIED] Flag: <strong>' + correctFlag + '</strong> (100 pts)';
+      }
+    });
+  }
+
+  if (ctfVerifyBtn && ctfInput && ctfResult) {
+    ctfVerifyBtn.addEventListener('click', () => {
+      const val = ctfInput.value.trim();
+      if (val === correctFlag || val.toLowerCase() === correctFlag.toLowerCase()) {
+        ctfResult.className = 'ctf-result-badge success';
+        ctfResult.innerHTML = '<i class="fas fa-check-circle me-1"></i> [EXCELLENT!] Valid Flag Captured: <strong>' + correctFlag + '</strong>';
+      } else {
+        ctfResult.className = 'ctf-result-badge';
+        ctfResult.style.display = 'block';
+        ctfResult.style.color = '#EF4444';
+        ctfResult.innerHTML = '<i class="fas fa-times-circle me-1"></i> Incorrect flag submission. Decode the Base64 ciphertext above.';
+      }
+    });
+  }
+
+  // ==========================================================================
+  // 13. MITRE ATT&CK MATRIX EXPLORER
+  // ==========================================================================
+  const mitrePills = document.querySelectorAll('.mitre-technique-pill');
+  const mitrePanel = document.getElementById('mitreInspectorPanel');
+  const mitreDetails = {
+    'T1190': {
+      name: 'T1190 - Exploit Public-Facing Application',
+      tactic: 'Initial Access',
+      description: 'Adversaries exploit software vulnerabilities in internet-facing web apps, servers, or APIs to execute arbitrary code or gain an initial foothold.',
+      detection: 'Inspect web application firewall (WAF) anomaly alerts, audit HTTP status 500 error spikes, and enable parameterized SQL query enforcement.',
+      mitigation: 'Implement strict input validation, automated vulnerability scanning (Burp/OWASP ZAP), and regular software patch cycles.'
+    },
+    'T1110': {
+      name: 'T1110.001 - Password Guessing & Brute Force',
+      tactic: 'Credential Access',
+      description: 'Adversaries systematically submit lists of commonly used usernames and passwords against SSH, RDP, or web authentication endpoints.',
+      detection: 'Monitor auth.log or Event ID 4625 for rapid sequential failure events originating from a single external IP address.',
+      mitigation: 'Enforce rate-limiting, Fail2Ban / IP blocking rules, multi-factor authentication (MFA), and disable password-based root SSH logins.'
+    },
+    'T1059': {
+      name: 'T1059.001 - Command and Scripting: PowerShell',
+      tactic: 'Execution',
+      description: 'Adversaries execute malicious PowerShell scripts with hidden windows (-W Hidden) or Base64 encoded commands (-Enc) to bypass basic controls.',
+      detection: 'Enable PowerShell Script Block Logging (Event ID 4104) and monitor process creation events (Event ID 4688 / Sysmon Event ID 1).',
+      mitigation: 'Enforce Constrained Language Mode, PowerShell AppLocker execution policies, and deploy modern EDR heuristics.'
+    },
+    'T1548': {
+      name: 'T1548.003 - Sudo and Sudo Caching',
+      tactic: 'Privilege Escalation',
+      description: 'Adversaries take advantage of misconfigured sudoers rules (NOPASSWD) or binary SUID bits to elevate privileges to root/administrator.',
+      detection: 'Audit /etc/sudoers changes, monitor auditd EXECVE calls for sudo with wildcard arguments, and inspect GTFOBins executable usage.',
+      mitigation: 'Follow principle of least privilege in sudoers, restrict shell escape capabilities on maintenance utilities, and regularly run LinPEAS audits.'
+    },
+    'T1046': {
+      name: 'T1046 - Network Service Discovery',
+      tactic: 'Discovery',
+      description: 'Adversaries scan network segments using tools like Nmap or Rustscan to discover active IP addresses, open ports, and vulnerable services.',
+      detection: 'Suricata / Zeek rules matching high rates of TCP SYN packets across multiple destination ports within short intervals.',
+      mitigation: 'Implement internal VLAN segmentation, zero-trust network access (ZTNA), and restrict inter-VLAN lateral exploration.'
+    }
+  };
+
+  mitrePills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      mitrePills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const techId = pill.getAttribute('data-tech-id');
+      const data = mitreDetails[techId];
+
+      if (data && mitrePanel) {
+        mitrePanel.classList.add('visible');
+        mitrePanel.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-cyan font-bold">${data.name}</span>
+            <span class="badge bg-dark text-teal border border-secondary">${data.tactic}</span>
+          </div>
+          <p class="text-secondary small mb-2">${data.description}</p>
+          <div class="mb-2">
+            <strong class="text-warning small"><i class="fas fa-radar me-1"></i> Detection Playbook:</strong>
+            <div class="text-muted small">${data.detection}</div>
+          </div>
+          <div>
+            <strong class="text-success small"><i class="fas fa-shield-alt me-1"></i> Mitigation:</strong>
+            <div class="text-muted small">${data.mitre || data.mitigation}</div>
+          </div>
+        `;
+      }
+    });
+  });
+
+  // ==========================================================================
+  // CV VIEWER MODAL & MULTI-STRATEGY DOWNLOAD SYSTEM
+  // ==========================================================================
+  const cvViewerModalEl = document.getElementById('cvViewerModal');
+  const btnModalDirectDownload = document.getElementById('btnModalDirectDownload');
+  const btnModalCopyLink = document.getElementById('btnModalCopyLink');
+  const btnModalNewTab = document.getElementById('btnModalNewTab');
+
+  function triggerGuaranteedDownload() {
+    // Strategy 1: Fetch Base64 data and trigger direct Data-URI download
+    fetch('/api/cv-data')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.base64) {
+          const byteCharacters = atob(data.base64);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          const blob = new Blob([byteArray], { type: 'application/pdf' });
+          const blobUrl = window.URL.createObjectURL(blob);
+          
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = blobUrl;
+          a.download = data.filename || 'Muraduzzaman_Asha_CV.pdf';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(blobUrl);
+          }, 400);
+        }
+      })
+      .catch(() => {
+        // Fallback: window navigation
+        window.open('/download-cv', '_blank');
+      });
+  }
+
+  // Navbar and Hero CV click handlers
+  const cvTriggers = document.querySelectorAll('a[href="/download-cv"], #heroDownloadCvBtn');
+  cvTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // 1. Show interactive CV Hub Modal
+      if (cvViewerModalEl && typeof bootstrap !== 'undefined') {
+        const bsModal = bootstrap.Modal.getOrCreateInstance(cvViewerModalEl);
+        bsModal.show();
+      }
+
+      // 2. Trigger instant download
+      triggerGuaranteedDownload();
+
+      // 3. Button feedback
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check-circle text-success me-1"></i> Opening CV...';
+      setTimeout(() => {
+        btn.innerHTML = originalHtml;
+      }, 2000);
+    });
+  });
+
+  // Modal Toolbar: Direct Download button
+  if (btnModalDirectDownload) {
+    btnModalDirectDownload.addEventListener('click', () => {
+      triggerGuaranteedDownload();
+      const origText = btnModalDirectDownload.innerHTML;
+      btnModalDirectDownload.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Downloading...';
+      setTimeout(() => {
+        btnModalDirectDownload.innerHTML = '<i class="fas fa-check text-success me-1"></i> Saved!';
+        setTimeout(() => {
+          btnModalDirectDownload.innerHTML = origText;
+        }, 2000);
+      }, 1000);
+    });
+  }
+
+  // Modal Toolbar: Copy Link button
+  if (btnModalCopyLink) {
+    btnModalCopyLink.addEventListener('click', () => {
+      const fullUrl = window.location.origin + '/download-cv';
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        const origText = btnModalCopyLink.innerHTML;
+        btnModalCopyLink.innerHTML = '<i class="fas fa-check text-success me-1"></i> Copied!';
+        setTimeout(() => {
+          btnModalCopyLink.innerHTML = origText;
+        }, 2500);
+      }).catch(() => {
+        prompt('Copy this CV download link:', fullUrl);
+      });
+    });
+  }
 });
+

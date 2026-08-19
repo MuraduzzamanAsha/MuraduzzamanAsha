@@ -9,6 +9,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "@types/pdfkit": "^0.17.6",
+    "express": "^4.21.2",
+    "pdfkit": "^0.19.1"
   }
 }

@@ -522,11 +522,39 @@ a:hover {
   overflow: hidden;
   border: 1px solid var(--border-accent);
   margin-bottom: 20px;
+  background: #060B14;
+}
+
+.hud-slides-container {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+}
+
+.hud-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.04);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+  z-index: 1;
+}
+
+.hud-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
 }
 
 .hud-profile-img {
   width: 100%;
-  height: 380px;
+  height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
@@ -534,25 +562,115 @@ a:hover {
   transition: transform 0.4s ease;
 }
 
-.hud-image-wrapper:hover .hud-profile-img {
+.hud-slide:hover .hud-profile-img {
   transform: scale(1.02);
 }
 
 .hud-overlay-badge {
   position: absolute;
-  bottom: 14px;
+  bottom: 22px;
   left: 14px;
-  background: rgba(11, 18, 32, 0.9);
+  background: rgba(11, 18, 32, 0.92);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border-accent);
   padding: 6px 14px;
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 8px;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Slideshow Controls */
+.hud-slider-controls {
+  position: absolute;
+  bottom: 22px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(11, 18, 32, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-accent);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.hud-slide-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--cyber-cyan);
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.hud-slide-nav-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--text-bright);
+}
+
+.hud-slide-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 4px;
+}
+
+.hud-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.hud-dot.active {
+  background: var(--cyber-cyan);
+  box-shadow: 0 0 8px var(--cyber-cyan);
+  width: 14px;
+  border-radius: 4px;
+}
+
+/* 5s Auto-Rotation Progress Bar */
+.hud-rotation-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 10;
+}
+
+.hud-rotation-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyber-blue), var(--cyber-cyan));
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+}
+
+.hud-rotation-progress-bar.animate {
+  animation: hudProgressBarAnim 5s linear infinite;
+}
+
+@keyframes hudProgressBarAnim {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
 .hud-metric-chips {
@@ -1901,6 +2019,392 @@ a:hover {
   background: var(--cyber-cyan);
   color: var(--bg-primary);
   transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   INTERACTIVE CYBER CLI TERMINAL (DRAWER / FLOATING SHELL)
+   ========================================================================== */
+.cyber-cli-toggle-btn {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  background: var(--bg-card);
+  border: 1px solid var(--cyber-cyan);
+  color: var(--cyber-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  z-index: 1050;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.cyber-cli-toggle-btn:hover {
+  background: var(--cyber-cyan);
+  color: var(--bg-primary);
+  box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+.cyber-cli-drawer {
+  position: fixed;
+  bottom: 80px;
+  left: 25px;
+  width: min(600px, calc(100vw - 50px));
+  height: 420px;
+  background: rgba(6, 11, 20, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.15);
+  z-index: 1049;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.98);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.cyber-cli-drawer.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.cli-header {
+  background: #0B1220;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-bright);
+}
+
+.cli-window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.cli-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cli-dot.red { background: #EF4444; cursor: pointer; }
+.cli-dot.yellow { background: #F59E0B; }
+.cli-dot.green { background: #22C55E; }
+
+.cli-output-area {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: transparent;
+}
+
+.cli-output-line {
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+.cli-output-line.cmd-prompt {
+  color: var(--cyber-cyan);
+}
+
+.cli-output-line.system-msg {
+  color: var(--text-muted);
+}
+
+.cli-output-line.success-msg {
+  color: var(--cyber-green);
+}
+
+.cli-output-line.error-msg {
+  color: var(--cyber-red);
+}
+
+.cli-output-line.highlight-msg {
+  color: var(--cyber-teal);
+}
+
+.cli-input-wrapper {
+  background: rgba(11, 18, 32, 0.8);
+  border-top: 1px solid var(--border-subtle);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cli-input-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--cyber-cyan);
+  white-space: nowrap;
+}
+
+.cli-input-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-bright);
+}
+
+/* ==========================================================================
+   LIVE SOC SYSLOG & TELEMETRY STREAMER
+   ========================================================================== */
+.soc-streamer-box {
+  background: rgba(6, 11, 20, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+}
+
+.soc-streamer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.soc-streamer-logs {
+  height: 110px;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.stream-log-entry {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: fadeInLog 0.3s ease forwards;
+}
+
+@keyframes fadeInLog {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.log-tag {
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.log-tag.suricata { background: rgba(239, 68, 68, 0.2); color: #F87171; }
+.log-tag.zeek { background: rgba(56, 189, 248, 0.2); color: #38BDF8; }
+.log-tag.auditd { background: rgba(245, 158, 11, 0.2); color: #FBBF24; }
+.log-tag.firewall { background: rgba(34, 197, 94, 0.2); color: #4ADE80; }
+
+/* ==========================================================================
+   CTF CHALLENGE & CIPHER DECODER WIDGET
+   ========================================================================== */
+.ctf-challenge-box {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(11, 18, 32, 0.95));
+  border: 1px solid var(--cyber-cyan);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-top: 30px;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctf-challenge-box::before {
+  content: 'CTF_REVERSE_TASK';
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--border-accent);
+  letter-spacing: 0.1em;
+}
+
+.ctf-cipher-display {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px dashed var(--border-accent);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  color: var(--cyber-cyan);
+  word-break: break-all;
+  margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ctf-decode-interactive-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ctf-flag-input {
+  flex: 1;
+  min-width: 240px;
+  background: rgba(6, 11, 20, 0.8);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  padding: 8px 14px;
+  outline: none;
+}
+
+.ctf-flag-input:focus {
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.ctf-result-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-top: 10px;
+  display: none;
+}
+
+.ctf-result-badge.success {
+  display: block;
+  color: var(--cyber-green);
+  animation: fadeInLog 0.3s ease;
+}
+
+/* ==========================================================================
+   MITRE ATT&CK MATRIX EXPLORER
+   ========================================================================== */
+.mitre-matrix-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.mitre-tactic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.mitre-tactic-col {
+  background: rgba(6, 11, 20, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+}
+
+.mitre-tactic-header {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cyber-cyan);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.mitre-technique-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: block;
+}
+
+.mitre-technique-pill:hover,
+.mitre-technique-pill.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--cyber-cyan);
+  color: var(--text-bright);
+  transform: translateX(2px);
+}
+
+.mitre-inspector-panel {
+  background: rgba(9, 14, 23, 0.95);
+  border: 1px solid var(--cyber-cyan);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  display: none;
+}
+
+.mitre-inspector-panel.visible {
+  display: block;
+  animation: fadeInLog 0.3s ease;
+}
+
+/* Radar Sweep Animation on HUD Profile */
+.hud-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.hud-radar-sweep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.8), transparent);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+  animation: radarScan 3.5s linear infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes radarScan {
+  0% { top: 0%; opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0.2; }
 }
 
 /* ==========================================================================
