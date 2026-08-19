@@ -816,6 +816,9 @@ Available Commands:
         pdfZoomLevelEl.textContent = `${Math.round(scale * 80)}%`;
       }
 
+      // Set global container scale factor
+      pdfCanvasContainer.style.setProperty('--scale-factor', `${scale}`);
+
       for (let pageNum = 1; pageNum <= currentPdfDoc.numPages; pageNum++) {
         const page = await currentPdfDoc.getPage(pageNum);
         const viewport = page.getViewport({ scale });
@@ -828,6 +831,7 @@ Available Commands:
         pageWrapper.style.borderRadius = '4px';
         pageWrapper.style.overflow = 'hidden';
         pageWrapper.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.6), 0 8px 10px -6px rgba(0,0,0,0.6)';
+        pageWrapper.style.setProperty('--scale-factor', `${viewport.scale}`);
 
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -856,7 +860,144 @@ Available Commands:
         pageWrapper.appendChild(pageBadge);
         pdfCanvasContainer.appendChild(pageWrapper);
 
+        // 1. Render High-Resolution Canvas
         await page.render(renderContext).promise;
+
+        // 2. Render TextLayer (enables text selection & automatic link detection)
+        try {
+          const textContent = await page.getTextContent();
+          const textLayerDiv = document.createElement('div');
+          textLayerDiv.className = 'textLayer';
+          textLayerDiv.style.width = Math.floor(viewport.width) + 'px';
+          textLayerDiv.style.height = Math.floor(viewport.height) + 'px';
+          textLayerDiv.style.setProperty('--scale-factor', `${viewport.scale}`);
+          pageWrapper.appendChild(textLayerDiv);
+
+          if (pdfjsLib.TextLayer) {
+            const textLayer = new pdfjsLib.TextLayer({
+              textContentSource: textContent,
+              container: textLayerDiv,
+              viewport: viewport
+            });
+            await textLayer.render();
+          } else if (pdfjsLib.renderTextLayer) {
+            await pdfjsLib.renderTextLayer({
+              textContentSource: textContent,
+              container: textLayerDiv,
+              viewport: viewport,
+              textDivs: []
+            }).promise;
+          }
+
+          // Auto-Linkifier: Find text matching URLs, GitHub, LinkedIn, Email, Phone and make them interactive
+          const spans = textLayerDiv.querySelectorAll('span');
+          spans.forEach(span => {
+            const rawText = span.textContent.trim();
+            if (!rawText) return;
+
+            const lowerText = rawText.toLowerCase();
+
+            // Check if text relates to Email
+            if (lowerText.includes('@') || lowerText.includes('gmail') || /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(rawText)) {
+              span.classList.add('clickable-pdf-link');
+              span.title = `Email: ${rawText}`;
+              span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const email = rawText.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/) ? rawText.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)[0] : 'virusvirus734137@gmail.com';
+                navigator.clipboard.writeText(email).catch(() => {});
+                window.location.href = `mailto:${email}`;
+              });
+            }
+            // Check if text relates to GitHub
+            else if (lowerText.includes('github.com') || lowerText.includes('murad734138')) {
+              span.classList.add('clickable-pdf-link');
+              span.title = `GitHub Profile (Click to open)`;
+              span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open('https://github.com/Murad734138', '_blank', 'noopener,noreferrer');
+              });
+            }
+            // Check if text relates to LinkedIn
+            else if (lowerText.includes('linkedin.com') || lowerText.includes('muraduzzaman-asha')) {
+              span.classList.add('clickable-pdf-link');
+              span.title = `LinkedIn Profile (Click to open)`;
+              span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open('https://www.linkedin.com/in/muraduzzaman-asha-9706772b0', '_blank', 'noopener,noreferrer');
+              });
+            }
+            // Check if text relates to TryHackMe
+            else if (lowerText.includes('tryhackme.com') || lowerText.includes('murad734137') || lowerText.includes('tryhackme')) {
+              span.classList.add('clickable-pdf-link');
+              span.title = `TryHackMe Profile (Click to open)`;
+              span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open('https://tryhackme.com/p/murad734137', '_blank', 'noopener,noreferrer');
+              });
+            }
+            // Check if text is another URL or website
+            else if (
+              /https?:\/\/[^\s]+/.test(rawText) ||
+              /^(www\.|hackthebox\.com)/i.test(rawText) ||
+              /\.(com|org|io|dev|net|edu)(\/[^\s]*)?$/i.test(rawText)
+            ) {
+              let url = rawText;
+              if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+              }
+              span.classList.add('clickable-pdf-link');
+              span.title = `Open link: ${url}`;
+              span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.open(url, '_blank', 'noopener,noreferrer');
+              });
+            }
+            // Check for phone number
+            else if (/^(\+?880|01)[0-9]{8,10}$/.test(rawText.replace(/[\s-]/g, ''))) {
+              const phone = rawText.replace(/[\s-]/g, '');
+              span.classList.add('clickable-pdf-link');
+              span.title = `Call: ${phone}`;
+              span.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.location.href = `tel:${phone}`;
+              });
+            }
+          });
+        } catch (textErr) {
+          console.warn('Text layer render notice:', textErr);
+        }
+
+        // 3. Render native PDF AnnotationLayer (if PDF contains internal link annotations)
+        try {
+          const annotations = await page.getAnnotations({ intent: 'display' });
+          if (annotations && annotations.length > 0) {
+            const annotationLayerDiv = document.createElement('div');
+            annotationLayerDiv.className = 'annotationLayer';
+            annotationLayerDiv.style.width = Math.floor(viewport.width) + 'px';
+            annotationLayerDiv.style.height = Math.floor(viewport.height) + 'px';
+            pageWrapper.appendChild(annotationLayerDiv);
+
+            pdfjsLib.AnnotationLayer.render({
+              viewport: viewport.clone({ dontFlip: true }),
+              div: annotationLayerDiv,
+              annotations: annotations,
+              page: page,
+              linkService: {
+                getDestinationHash: () => '#',
+                getAnchorUrl: (hash) => hash,
+                setHash: () => {},
+                executeNamedAction: () => {},
+                addLinkAttributes: (link, url) => {
+                  link.href = url;
+                  link.target = '_blank';
+                  link.rel = 'noopener noreferrer';
+                }
+              }
+            });
+          }
+        } catch (annotErr) {
+          console.warn('Annotation layer render notice:', annotErr);
+        }
       }
     } catch (err) {
       console.warn('PDF.js render notice:', err);
@@ -962,6 +1103,51 @@ Available Commands:
       }).catch(() => {
         prompt('Copy this CV download link:', fullUrl);
       });
+    });
+  }
+
+  // ==========================================================================
+  // QUICK LINKS MODAL BUTTONS (GUARANTEED CROSS-BROWSER & IFRAME COMPATIBLE)
+  // ==========================================================================
+  const quickLinkGithub = document.getElementById('quickLinkGithub');
+  const quickLinkLinkedIn = document.getElementById('quickLinkLinkedIn');
+  const quickLinkEmail = document.getElementById('quickLinkEmail');
+  const quickLinkTryHackMe = document.getElementById('quickLinkTryHackMe');
+
+  if (quickLinkGithub) {
+    quickLinkGithub.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open('https://github.com/Murad734138', '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (quickLinkLinkedIn) {
+    quickLinkLinkedIn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open('https://www.linkedin.com/in/muraduzzaman-asha-9706772b0', '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  if (quickLinkEmail) {
+    quickLinkEmail.addEventListener('click', (e) => {
+      e.preventDefault();
+      const email = 'virusvirus734137@gmail.com';
+      try {
+        navigator.clipboard.writeText(email);
+        const origHtml = quickLinkEmail.innerHTML;
+        quickLinkEmail.innerHTML = '<i class="fas fa-check text-success me-1"></i> Copied Email!';
+        setTimeout(() => {
+          quickLinkEmail.innerHTML = origHtml;
+        }, 2000);
+      } catch (err) {}
+      window.location.href = `mailto:${email}`;
+    });
+  }
+
+  if (quickLinkTryHackMe) {
+    quickLinkTryHackMe.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open('https://tryhackme.com/p/murad734137', '_blank', 'noopener,noreferrer');
     });
   }
 });

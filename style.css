@@ -2502,3 +2502,119 @@ a:hover {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   PDF.JS CANVAS, TEXT LAYER & INTERACTIVE CLICKABLE ANNOTATIONS
+   ========================================================================== */
+:root {
+  --scale-factor: 1.25;
+}
+
+.pdf-page-card {
+  --scale-factor: 1.25;
+  position: relative;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  margin-bottom: 24px;
+  overflow: hidden;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.pdf-page-card canvas {
+  display: block;
+}
+
+/* PDF.js Text Layer (Enables text selection, search and link detection) */
+.textLayer {
+  --scale-factor: 1.25;
+  position: absolute;
+  text-align: initial;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0.2;
+  line-height: 1.0;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  z-index: 2;
+}
+
+.textLayer :is(span, br) {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+.textLayer span.clickable-pdf-link {
+  color: rgba(2, 132, 199, 0.65) !important;
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  text-decoration-color: #0284c7 !important;
+  pointer-events: auto !important;
+  background: rgba(56, 189, 248, 0.12);
+  border-radius: 3px;
+  padding: 1px 3px;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.textLayer span.clickable-pdf-link:hover {
+  color: #0369a1 !important;
+  background: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+/* PDF.js Annotation Layer (Standard PDF hyperlinks) */
+.annotationLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.annotationLayer section {
+  position: absolute;
+  text-align: initial;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+.annotationLayer .linkAnnotation > a,
+.annotationLayer a {
+  position: absolute;
+  font-size: 1em;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: rgba(56, 189, 248, 0.12);
+  border-bottom: 1.5px solid rgba(56, 189, 248, 0.6);
+  border-radius: 2px;
+  transition: all 0.18s ease;
+  pointer-events: auto !important;
+}
+
+.annotationLayer .linkAnnotation > a:hover,
+.annotationLayer a:hover {
+  background: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.hover-cyan:hover {
+  color: #38bdf8 !important;
+  border-color: #38bdf8 !important;
+  background-color: rgba(56, 189, 248, 0.15) !important;
+}

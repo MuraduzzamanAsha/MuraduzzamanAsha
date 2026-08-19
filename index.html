@@ -55,6 +55,12 @@
       rel="stylesheet"
     />
 
+    <!-- Mozilla PDF.js Viewer CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css"
+    />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1956,13 +1962,35 @@
           </div>
 
           <div class="modal-cyber-body p-3">
-            <!-- Helpful Tip for iframe sandbox download -->
-            <div class="d-flex align-items-center justify-content-between p-2 px-3 mb-3 rounded font-mono small" style="background: rgba(56, 189, 248, 0.08); border: 1px solid var(--border-accent);">
-              <div>
-                <i class="fas fa-hard-drive text-cyan me-2"></i>
-                <span class="text-bright">Click <strong>"Save to Local Disk"</strong> to download directly to your device storage.</span>
+            <!-- Helpful Tip & Interactive Quick Links -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between p-2 px-3 mb-2 rounded font-mono small" style="background: rgba(56, 189, 248, 0.08); border: 1px solid var(--border-accent);">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-hard-drive text-cyan"></i>
+                <span class="text-bright">Click <strong>"Save to Local Disk"</strong> to download directly.</span>
               </div>
               <span class="badge bg-dark text-cyan border border-secondary d-none d-md-inline">175 KB &bull; PDF 1.7</span>
+            </div>
+
+            <!-- Direct Clickable Quick Links from Resume -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 p-2 px-3 mb-3 rounded" style="background: rgba(15, 23, 42, 0.95); border: 1px solid var(--border-accent);">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-primary text-white font-mono"><i class="fas fa-bolt me-1"></i> QUICK LINKS</span>
+                <span class="text-secondary small font-mono d-none d-sm-inline">Direct Operator Profiles:</span>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-outline btn-sm font-mono" id="quickLinkGithub" title="Visit GitHub">
+                  <i class="fab fa-github text-cyan me-1"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/muraduzzaman-asha-9706772b0" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-outline btn-sm font-mono" id="quickLinkLinkedIn" title="Visit LinkedIn">
+                  <i class="fab fa-linkedin text-cyan me-1"></i> LinkedIn
+                </a>
+                <a href="mailto:virusvirus734137@gmail.com" class="btn btn-cyber-outline btn-sm font-mono" id="quickLinkEmail" title="Send Email / Copy Address">
+                  <i class="fas fa-envelope text-cyan me-1"></i> Email
+                </a>
+                <a href="https://tryhackme.com/p/murad734137" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-outline btn-sm font-mono" id="quickLinkTryHackMe" title="Visit TryHackMe Profile">
+                  <i class="fas fa-shield-alt text-cyan me-1"></i> TryHackMe
+                </a>
+              </div>
             </div>
 
             <!-- CV Actions & Download Toolbar -->
