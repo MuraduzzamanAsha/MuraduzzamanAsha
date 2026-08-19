@@ -3,61 +3,134 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./gallery/favicon.ico" type="image/x-icon">
-    <title>Muraduzzaman Asha</title>
+    
+    <!-- Safe Fetch Guard -->
+    <script>
+      (function() {
+        try {
+          var _nativeFetch = window.fetch ? window.fetch.bind(window) : null;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return _nativeFetch; },
+            set: function(val) { _nativeFetch = val; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch(e) {}
+      })();
+    </script>
+
+    <!-- SEO & Primary Meta Tags -->
+    <title>Muraduzzaman Asha | Cyber Security | Blue Team | SOC | SIEM</title>
+    <meta name="title" content="Muraduzzaman Asha | Cyber Security | Blue Team | SOC | SIEM" />
+    <meta
+      name="description"
+      content="Muraduzzaman Asha is an ICT graduate focused on cybersecurity, Blue Team operations, SOC, SIEM, penetration testing, API security, CTFs, and security research."
+    />
+    <meta name="author" content="Muraduzzaman Asha" />
+    <meta name="keywords" content="Cybersecurity, Blue Team, SOC Analyst, SIEM, Penetration Testing, Vulnerability Assessment, Web Security, API Security, CTF, Muraduzzaman Asha" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Muraduzzaman Asha | Cyber Security | Blue Team | SOC | SIEM" />
+    <meta property="og:description" content="Aspiring Cybersecurity Engineer with hands-on experience across 120+ TryHackMe rooms, CTF finalist achievements, security automation, and SOC/SIEM learning." />
+    <meta property="og:image" content="./gallery/muraduzzamanasha.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Muraduzzaman Asha | Cyber Security Portfolio" />
+    <meta property="twitter:description" content="Aspiring Cybersecurity Engineer with hands-on experience in SOC, SIEM, Penetration Testing, and CTF competitions." />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./gallery/favicon.ico" type="image/x-icon" />
+
+    <!-- FontAwesome 6 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!-- Bootstrap 5 CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Custom Cybersecurity Stylesheet -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- ==========================================================================
+         1. NAVBAR
+         ========================================================================== -->
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <nav id="mainCyberNavbar" class="navbar navbar-expand-xl navbar-dark fixed-top navbar-custom" aria-label="Main Navigation">
         <div class="container">
-          <img src="./gallery/logo.png" alt="logo" class="logo">
-          <a href="#home" class="title-nav">Muraduzzaman <span>Asha</span></a>
+          <a href="#home" class="navbar-brand nav-brand-container">
+            <div class="nav-logo-box">&gt;_</div>
+            <div>
+              <span class="nav-brand-text">MURADUZZAMAN <span>ASHA</span></span>
+              <div class="d-none d-sm-inline-flex nav-status-badge">
+                <span class="status-dot-pulse"></span> SEC_OP: ACTIVE
+              </div>
+            </div>
+          </a>
+
           <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+            data-bs-target="#navbarCyberNav"
+            aria-controls="navbarCyberNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <i class="fas fa-bars"></i>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+
+          <div class="collapse navbar-collapse" id="navbarCyberNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-xl-0 align-items-xl-center">
               <li class="nav-item">
-                <a class="nav-link active" href="#home">Home</a>
+                <a class="nav-link" href="#home">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#education">Education</a>
+                <a class="nav-link" href="#skills">Security Stack</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#projects">Projects</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#certifications">Certifications</a>
+                <a class="nav-link" href="#labs">Labs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#gallery">Gallery</a>
+                <a class="nav-link" href="#ctf">CTF</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#soc">Blue Team / SOC</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#research">Research</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#education">Education</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact</a>
+              </li>
+              <li class="nav-item ms-xl-2 mt-2 mt-xl-0">
+                <a href="#contact" class="btn btn-nav-action">
+                  <i class="fas fa-file-download me-1"></i> CV / Contact
+                </a>
               </li>
             </ul>
           </div>
@@ -65,552 +138,1614 @@
       </nav>
     </header>
 
-    <!-- home -->
-    <section id="home" class="hero-section">
-      <div class="container hero-content">
-        <h6 class="section-subtitle">Hello, I'm</h6>
-        <h1 class="hero-title">Muraduzzaman Asha</h1>
-        <p class="hero-subtitle">
-          Undergraduate IT Student | Programmer | Problem Solver | CTF Player
-        </p>
-        <a href="#projects" class="btn btn-primary me-3">View My Work</a>
-        <a href="#contact" class="btn btn-outline-light">Contact Me</a>
-      </div>
-    </section>
-
-    <!-- about -->
-    <section id="about" class="py-5">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
-            <h6 class="section-subtitle">Get To Know</h6>
-            <h2 class="section-title">About Me</h2>
-            <p>
-              I'm an enthusiastic undergraduate IT student currently pursuing my
-              degree at Mawlana Bhashani Science and Technology University. My
-              passion for technology drives me to constantly learn and explore
-              new areas in programming and problem-solving.
-            </p>
-            <p>
-              When I'm not coding, you can find me participating in coding
-              competitions, working on personal projects, or exploring the
-              latest tech trends. I believe in the power of technology to solve
-              real-world problems and am committed to developing solutions that
-              make a difference.
-            </p>
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <div class="py-2">
-                  <h5 class="d-inline">Name:</h5>
-                  <span class="ms-2">Muraduzzaman Asha</span>
-                </div>
-                <div class="py-2">
-                  <h5 class="d-inline">ID:</h5>
-                  <span class="ms-2">IT-21014</span>
-                </div>
+    <main>
+      <!-- ==========================================================================
+           2. HERO SECTION
+           ========================================================================== -->
+      <section id="home" class="hero-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <!-- Hero Left Column -->
+            <div class="col-lg-7">
+              <div class="hero-tagline-bar">
+                <i class="fas fa-shield-alt text-cyan"></i>
+                <span>[ CYBER SECURITY / SOC / SECURITY ENGINEERING ]</span>
               </div>
-              <div class="col-md-6">
-                <div class="py-2">
-                  <h5 class="d-inline">University:</h5>
-                  <span class="ms-2">MBSTU</span>
+
+              <h1 class="hero-main-title">MURADUZZAMAN ASHA</h1>
+              <div class="hero-positioning">Aspiring Cyber Security Engineer</div>
+
+              <div class="hero-typed-wrapper">
+                <span class="text-secondary me-2">$ focus:</span>
+                <span id="hero-typed-target" class="hero-typed-text"></span>
+                <span class="typed-cursor"></span>
+              </div>
+
+              <p class="hero-core-quote">
+                "Breaking systems to understand them. Building skills to defend them."
+              </p>
+
+              <p class="hero-intro-text">
+                Cybersecurity practitioner and ICT graduate focused on Blue Team operations, SOC & SIEM, penetration testing, API security, security automation, and threat detection through hands-on labs and real-world challenges.
+              </p>
+
+              <div class="hero-cta-group">
+                <a href="#projects" class="btn btn-cyber-primary">
+                  <i class="fas fa-terminal"></i> Explore My Work
+                </a>
+                <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-secondary">
+                  <i class="fab fa-github"></i> View GitHub
+                </a>
+                <a href="#contact" class="btn btn-cyber-outline">
+                  <i class="fas fa-envelope"></i> Get In Touch
+                </a>
+              </div>
+
+              <div class="hero-social-links">
+                <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="GitHub Profile">
+                  <i class="fab fa-github"></i> <span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/muraduzzaman-asha-30077b25a/" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="LinkedIn Profile">
+                  <i class="fab fa-linkedin-in"></i> <span>LinkedIn</span>
+                </a>
+                <a href="https://tryhackme.com" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="TryHackMe Profile">
+                  <i class="fas fa-shield-virus"></i> <span>TryHackMe (Top 3%)</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Hero Right Column (HUD & Professional Photo) -->
+            <div class="col-lg-5">
+              <div class="hero-hud-card">
+                <div class="hud-corner-tl"></div>
+                <div class="hud-corner-br"></div>
+
+                <div class="hud-top-bar">
+                  <span><i class="fas fa-microchip me-1 text-cyan"></i> NODE_ID: MBSTU-SEC-01</span>
+                  <span class="text-success"><i class="fas fa-circle font-xs me-1"></i> ONLINE</span>
                 </div>
-                <div class="py-2">
-                  <h5 class="d-inline">Status:</h5>
-                  <span class="ms-2">Undergraduate Student</span>
+
+                <div class="hud-image-wrapper">
+                  <img
+                    src="./gallery/muraduzzamanasha.jpg"
+                    alt="Muraduzzaman Asha - Cybersecurity Professional"
+                    class="hud-profile-img"
+                  />
+                  <div class="hud-overlay-badge">
+                    <i class="fas fa-user-shield text-cyan"></i>
+                    <span>OPERATOR: MURADUZZAMAN</span>
+                  </div>
+                </div>
+
+                <div class="hud-metric-chips">
+                  <div class="hud-chip">
+                    <div class="hud-chip-label">PRACTICE LABS</div>
+                    <div class="hud-chip-value">120+ ROOMS</div>
+                  </div>
+                  <div class="hud-chip">
+                    <div class="hud-chip-label">GLOBAL RANK</div>
+                    <div class="hud-chip-value">TOP 3% THM</div>
+                  </div>
+                  <div class="hud-chip">
+                    <div class="hud-chip-label">CURRENT FOCUS</div>
+                    <div class="hud-chip-value">BLUE TEAM / SOC</div>
+                  </div>
+                  <div class="hud-chip">
+                    <div class="hud-chip-label">CTF FINALE</div>
+                    <div class="hud-chip-value">6TH PLACE EWU</div>
+                  </div>
+                </div>
+
+                <div class="hud-terminal-preview">
+                  <div class="terminal-line">
+                    <span class="terminal-prompt">$</span> <span class="terminal-cmd">whoami</span>
+                  </div>
+                  <div class="terminal-line terminal-output">
+                    muraduzzaman@security-workstation
+                  </div>
+                  <div class="terminal-line">
+                    <span class="terminal-prompt">$</span> <span class="terminal-cmd">cat /etc/mission</span>
+                  </div>
+                  <div class="terminal-line terminal-output">
+                    [+] Blue Team | SOC Monitoring | Threat Detection | SIEM
+                  </div>
                 </div>
               </div>
             </div>
-            <a href="#" class="btn btn-primary mt-3">Download CV</a>
-          </div>
-          <div class="col-lg-6" data-aos="fade-left">
-            <img
-              src="./gallery/muraduzzamanasha.jpg"
-              class="img-fluid about-img"
-              alt="Muraduzzaman Asha"
-            />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- education -->
-    <section id="education" class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h6 class="section-subtitle">Academic Background</h6>
-          <h2 class="section-title">Education</h2>
+      <!-- ==========================================================================
+           3. SECURITY PROFILE (HORIZONTAL STATS BAR)
+           ========================================================================== -->
+      <section id="stats" class="stats-bar-section" aria-label="Security Metrics">
+        <div class="container">
+          <div class="row g-3">
+            <div class="col-6 col-lg-3">
+              <div class="stat-card">
+                <div class="stat-number">120+</div>
+                <div class="stat-label">TryHackMe Rooms</div>
+                <div class="stat-subtext">Hands-on pentest & lab rooms</div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+              <div class="stat-card">
+                <div class="stat-number">TOP 3%</div>
+                <div class="stat-label">Global THM Ranking</div>
+                <div class="stat-subtext">Offensive & defensive score</div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+              <div class="stat-card">
+                <div class="stat-number">6th</div>
+                <div class="stat-label">EWU RoboFest CTF</div>
+                <div class="stat-subtext">Grand Finale (Team Bit Bakers)</div>
+              </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+              <div class="stat-card">
+                <div class="stat-number">3.56</div>
+                <div class="stat-label">B.Sc. in ICT (CGPA)</div>
+                <div class="stat-subtext">MBSTU &bull; Graduated June 2026</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="card" data-aos="fade-up">
-              <div class="card-body">
-                <div class="d-flex">
-                  <div class="flex-shrink-0">
-                    <i
-                      class="fas fa-graduation-cap fa-3x me-4"
-                      style="color: var(--primary-color)"
-                    ></i>
+      </section>
+
+      <!-- ==========================================================================
+           4. ABOUT THE OPERATOR
+           ========================================================================== -->
+      <section id="about" class="about-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+              <span class="section-tag">Operator Profile</span>
+              <h2 class="section-title">ABOUT THE OPERATOR</h2>
+              <p class="lead text-bright mb-4">
+                An aspiring cybersecurity engineer driven by hands-on investigation, practical labs, and security engineering.
+              </p>
+              <p>
+                I am a cybersecurity-focused ICT graduate from Mawlana Bhashani Science and Technology University (MBSTU). My methodology is rooted in active, practical experimentation: I learn systems from the inside out by identifying misconfigurations, exploiting vulnerabilities in isolated labs, analyzing log telemetry, and engineering defensive monitoring controls.
+              </p>
+              <p>
+                Having developed a solid background in offensive reconnaissance, Linux/Windows privilege escalation, and web/API security through 120+ lab environments and national CTF competitions, I am actively expanding my specialization into <strong>Blue Team operations, SOC analysis, SIEM architectures, log analysis, threat detection, and incident response</strong>.
+              </p>
+
+              <!-- 4 Operator Pillars -->
+              <div class="operator-pillars">
+                <div class="pillar-item">
+                  <i class="fas fa-shield-virus pillar-icon"></i>
+                  <h3 class="pillar-title">Offensive Security</h3>
+                  <p class="pillar-desc">Reconnaissance, vulnerability assessment, web exploitation, and privilege escalation.</p>
+                </div>
+                <div class="pillar-item">
+                  <i class="fas fa-radar pillar-icon"></i>
+                  <h3 class="pillar-title">Blue Team & SOC</h3>
+                  <p class="pillar-desc">SIEM log analysis, alert triage, incident triage, and MITRE ATT&CK alignment.</p>
+                </div>
+                <div class="pillar-item">
+                  <i class="fas fa-globe-americas pillar-icon"></i>
+                  <h3 class="pillar-title">Web & API Security</h3>
+                  <p class="pillar-desc">OWASP Top 10 auditing, authorization bypasses, SQLi, XSS, and parameter tampering.</p>
+                </div>
+                <div class="pillar-item">
+                  <i class="fas fa-code-branch pillar-icon"></i>
+                  <h3 class="pillar-title">Security Research</h3>
+                  <p class="pillar-desc">Static analysis and machine learning research for software supply chain threats.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Specification Card -->
+            <div class="col-lg-5">
+              <div class="operator-profile-card">
+                <div class="profile-card-header">
+                  <div>
+                    <h3 class="h5 mb-1 text-bright">TECHNICAL DOSSIER</h3>
+                    <span class="font-mono text-muted small">OPERATOR_ID: IT-21014</span>
+                  </div>
+                  <span class="badge bg-dark text-cyan font-mono border border-secondary">VERIFIED</span>
+                </div>
+
+                <div class="profile-spec-item">
+                  <span class="profile-spec-label">Full Name</span>
+                  <span class="profile-spec-value">Muraduzzaman Asha</span>
+                </div>
+
+                <div class="profile-spec-item">
+                  <span class="profile-spec-label">Location</span>
+                  <span class="profile-spec-value"><i class="fas fa-map-marker-alt text-cyan me-2"></i>Tangail, Bangladesh</span>
+                </div>
+
+                <div class="profile-spec-item">
+                  <span class="profile-spec-label">Education</span>
+                  <span class="profile-spec-value">B.Sc. in ICT &bull; MBSTU (CGPA 3.56/4.00)</span>
+                </div>
+
+                <div class="profile-spec-item">
+                  <span class="profile-spec-label">Primary Specialization</span>
+                  <span class="profile-spec-value highlight">Cyber Security / Blue Team / SOC / SIEM</span>
+                </div>
+
+                <div class="profile-spec-item">
+                  <span class="profile-spec-label">Current Active Learning</span>
+                  <span class="profile-spec-value">SOC Monitoring, SIEM Log Analysis & Incident Response</span>
+                </div>
+
+                <div class="profile-spec-item">
+                  <span class="profile-spec-label">Primary Interests</span>
+                  <span class="profile-spec-value">Threat Detection, Web/API Security, CTF Research</span>
+                </div>
+
+                <div class="profile-spec-item border-0">
+                  <span class="profile-spec-label">Direct Contact</span>
+                  <span class="profile-spec-value font-mono small text-cyan">muraduzzamanasha.job@gmail.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           5. CYBERSECURITY JOURNEY (TIMELINE)
+           ========================================================================== -->
+      <section id="journey" class="journey-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Growth Path</span>
+            <h2 class="section-title">CYBERSECURITY JOURNEY</h2>
+            <p class="section-description mx-auto">
+              A timeline tracing the progression from foundational networking and Linux environments to offensive lab mastery and defensive SOC operations.
+            </p>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div class="timeline-container">
+                <!-- 2024 -->
+                <div class="timeline-item">
+                  <div class="timeline-node"><i class="fas fa-play"></i></div>
+                  <div class="timeline-card">
+                    <span class="timeline-year-tag">2024</span>
+                    <h3 class="timeline-title">Hands-on Security Foundations & Lab Setup</h3>
+                    <p class="timeline-text">
+                      Initiated rigorous cybersecurity training covering TCP/IP protocol architectures, Linux administration, Windows security internals, network packet sniffing with Wireshark, and virtualized target isolation.
+                    </p>
+                    <div class="timeline-chips">
+                      <span class="tech-chip">TCP/IP</span>
+                      <span class="tech-chip">Kali Linux</span>
+                      <span class="tech-chip">Wireshark</span>
+                      <span class="tech-chip">VirtualBox</span>
+                      <span class="tech-chip">Python Scripting</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2024-2026 -->
+                <div class="timeline-item">
+                  <div class="timeline-node"><i class="fas fa-shield-alt"></i></div>
+                  <div class="timeline-card">
+                    <span class="timeline-year-tag">2024 &mdash; 2026</span>
+                    <h3 class="timeline-title">Offensive Labs, TryHackMe (120+ Rooms) & VulnHub</h3>
+                    <p class="timeline-text">
+                      Executed penetration testing labs across Linux and Windows targets. Mastered reconnaissance (Nmap, Rustscan, Gobuster), vulnerability assessment, OWASP Top 10 exploitation, Linux/Windows privilege escalation (LinPEAS, SUID, permissions abuse), and structured technical writeup documentation.
+                    </p>
+                    <div class="timeline-chips">
+                      <span class="tech-chip">120+ THM Rooms</span>
+                      <span class="tech-chip">Burp Suite</span>
+                      <span class="tech-chip">Metasploit</span>
+                      <span class="tech-chip">LinPEAS</span>
+                      <span class="tech-chip">PrivEsc</span>
+                      <span class="tech-chip">OWASP Top 10</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2025-2026 -->
+                <div class="timeline-item">
+                  <div class="timeline-node"><i class="fas fa-flag"></i></div>
+                  <div class="timeline-card">
+                    <span class="timeline-year-tag">2025 &mdash; 2026</span>
+                    <h3 class="timeline-title">Web Security, API Security & CTF Competitions</h3>
+                    <p class="timeline-text">
+                      Focused deeply on Web Application Security, API endpoints auditing, and national Capture The Flag (CTF) competitions. Competed across categories including Web Exploitation, Reverse Engineering, Cryptography, Linux forensics, and OSINT.
+                    </p>
+                    <div class="timeline-chips">
+                      <span class="tech-chip">API Security</span>
+                      <span class="tech-chip">Authentication Testing</span>
+                      <span class="tech-chip">Reverse Engineering</span>
+                      <span class="tech-chip">Cryptography</span>
+                      <span class="tech-chip">OSINT</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2026 Achievements -->
+                <div class="timeline-item">
+                  <div class="timeline-node"><i class="fas fa-trophy"></i></div>
+                  <div class="timeline-card">
+                    <span class="timeline-year-tag">2026</span>
+                    <h3 class="timeline-title">National CTF Finalist & Top 3% Global Ranking</h3>
+                    <p class="timeline-text">
+                      Achieved 6th place in the EWU National RoboFest 2026 CTF Grand Finale (Team Bit Bakers among top 40 finalists). Qualified for Cybernauts 2026 CTF Grand Finale representing MBSTU. Attained Top 3% global ranking on TryHackMe.
+                    </p>
+                    <div class="timeline-chips">
+                      <span class="tech-chip">6th Place EWU RoboFest</span>
+                      <span class="tech-chip">Cybernauts Finale</span>
+                      <span class="tech-chip">Top 3% THM</span>
+                      <span class="tech-chip">Team Bit Bakers</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2026 Graduation -->
+                <div class="timeline-item">
+                  <div class="timeline-node"><i class="fas fa-graduation-cap"></i></div>
+                  <div class="timeline-card">
+                    <span class="timeline-year-tag">JUNE 2026</span>
+                    <h3 class="timeline-title">B.Sc. in ICT Degree Completed (CGPA: 3.56/4.00)</h3>
+                    <p class="timeline-text">
+                      Graduated from Mawlana Bhashani Science and Technology University (MBSTU) with a Bachelor of Science in Information and Communication Technology, completing capstone research in static analysis and machine learning for malicious package detection.
+                    </p>
+                    <div class="timeline-chips">
+                      <span class="tech-chip">B.Sc. ICT</span>
+                      <span class="tech-chip">MBSTU</span>
+                      <span class="tech-chip">CGPA 3.56</span>
+                      <span class="tech-chip">Undergraduate Research</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2026+ Present Focus -->
+                <div class="timeline-item">
+                  <div class="timeline-node active-node"><i class="fas fa-radar"></i></div>
+                  <div class="timeline-card" style="border-color: var(--cyber-cyan); background: rgba(19, 30, 50, 0.9);">
+                    <span class="timeline-year-tag" style="background: var(--cyber-cyan); color: #070C16;">PRESENT / CURRENT FOCUS</span>
+                    <h3 class="timeline-title">Expanding into Blue Team, SOC & SIEM Operations</h3>
+                    <p class="timeline-text">
+                      Channeling offensive security insights directly into defensive operations: enterprise log analysis, SIEM dashboarding, alert triage, incident response procedures, and MITRE ATT&CK framework mapping.
+                    </p>
+                    <div class="timeline-chips">
+                      <span class="tech-chip">SOC Operations</span>
+                      <span class="tech-chip">SIEM Concepts</span>
+                      <span class="tech-chip">Log Analysis</span>
+                      <span class="tech-chip">Incident Response</span>
+                      <span class="tech-chip">MITRE ATT&CK</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           6. SECURITY STACK / SKILLS
+           ========================================================================== -->
+      <section id="skills" class="skills-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Security Arsenal</span>
+            <h2 class="section-title">TECHNICAL SECURITY STACK</h2>
+            <p class="section-description mx-auto">
+              Categorized tooling and domain proficiencies acquired through practical lab simulations, security research, and defensive telemetry analysis.
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <!-- 1. Offensive Security -->
+            <div class="col-md-6 col-lg-4">
+              <div class="skill-category-card">
+                <div class="skill-category-header">
+                  <div class="skill-category-icon">
+                    <i class="fas fa-crosshairs"></i>
                   </div>
                   <div>
-                    <h4 class="card-title">
-                      Bachelor of Science in Information and Communication
-                      Technology
-                    </h4>
-                    <h6 class="text-muted">
-                      Mawlana Bhashani Science and Technology University
-                    </h6>
-                    <p class="card-text">
-                      Session: 2020-2021 (Currently Enrolled)
-                    </p>
-                    <p>
-                      Key Courses: Programming Fundamentals, Data Structures,
-                      Algorithms, Database Systems, Web Development
-                    </p>
+                    <h3 class="skill-category-title">Offensive Security</h3>
+                    <div class="skill-category-subtitle">RECON, EXPLOITATION & PRIVESC</div>
+                  </div>
+                </div>
+                <div class="skill-badges-grid">
+                  <span class="interactive-skill-badge" title="Web proxy & vulnerability auditing"><i class="fas fa-spider text-cyan"></i> Burp Suite</span>
+                  <span class="interactive-skill-badge" title="Network scanning & port auditing"><i class="fas fa-search text-cyan"></i> Nmap</span>
+                  <span class="interactive-skill-badge" title="Fast port scanner in Rust"><i class="fas fa-bolt text-cyan"></i> Rustscan</span>
+                  <span class="interactive-skill-badge" title="Exploitation & post-exploitation framework"><i class="fas fa-terminal text-cyan"></i> Metasploit</span>
+                  <span class="interactive-skill-badge" title="Directory & DNS enumeration"><i class="fas fa-folder-open text-cyan"></i> Gobuster</span>
+                  <span class="interactive-skill-badge" title="Linux privilege escalation auditing"><i class="fas fa-arrow-up text-cyan"></i> LinPEAS</span>
+                  <span class="interactive-skill-badge" title="WordPress vulnerability scanner"><i class="fab fa-wordpress text-cyan"></i> WPScan</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Blue Team & SOC -->
+            <div class="col-md-6 col-lg-4">
+              <div class="skill-category-card" style="border-color: rgba(56, 189, 248, 0.35);">
+                <div class="skill-category-header">
+                  <div class="skill-category-icon" style="background: rgba(34, 211, 238, 0.15); color: var(--cyber-teal);">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <div>
+                    <h3 class="skill-category-title">Blue Team & SOC</h3>
+                    <div class="skill-category-subtitle">DEFENSE, SIEM & INCIDENT RESPONSE</div>
+                  </div>
+                </div>
+                <div class="skill-badges-grid">
+                  <span class="interactive-skill-badge" title="Security Operations Center monitoring"><i class="fas fa-desktop text-teal"></i> SOC Operations</span>
+                  <span class="interactive-skill-badge" title="Security Information & Event Management"><i class="fas fa-chart-line text-teal"></i> SIEM Concepts</span>
+                  <span class="interactive-skill-badge" title="Windows Event & Syslog analysis"><i class="fas fa-file-invoice text-teal"></i> Log Analysis</span>
+                  <span class="interactive-skill-badge" title="Threat hunting & rule matching"><i class="fas fa-radar text-teal"></i> Threat Detection</span>
+                  <span class="interactive-skill-badge" title="Triage & containment methodologies"><i class="fas fa-ambulance text-teal"></i> Incident Response</span>
+                  <span class="interactive-skill-badge" title="Adversary tactic & technique mapping"><i class="fas fa-th text-teal"></i> MITRE ATT&CK</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Web & API Security -->
+            <div class="col-md-6 col-lg-4">
+              <div class="skill-category-card">
+                <div class="skill-category-header">
+                  <div class="skill-category-icon">
+                    <i class="fas fa-globe"></i>
+                  </div>
+                  <div>
+                    <h3 class="skill-category-title">Web & API Security</h3>
+                    <div class="skill-category-subtitle">APPSEC AUDITING & TESTING</div>
+                  </div>
+                </div>
+                <div class="skill-badges-grid">
+                  <span class="interactive-skill-badge" title="Top 10 application security risks"><i class="fas fa-list-ol text-cyan"></i> OWASP Top 10</span>
+                  <span class="interactive-skill-badge" title="Database injection vector testing"><i class="fas fa-database text-cyan"></i> SQL Injection (SQLi)</span>
+                  <span class="interactive-skill-badge" title="Stored, reflected & DOM XSS"><i class="fas fa-code text-cyan"></i> XSS Testing</span>
+                  <span class="interactive-skill-badge" title="Session, JWT & auth bypass tests"><i class="fas fa-key text-cyan"></i> Auth Testing</span>
+                  <span class="interactive-skill-badge" title="Hidden endpoint & parameter discovery"><i class="fas fa-sitemap text-cyan"></i> Dir Enumeration</span>
+                  <span class="interactive-skill-badge" title="REST API authorization & logic testing"><i class="fas fa-plug text-cyan"></i> API Security</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Networking & Protocols -->
+            <div class="col-md-6 col-lg-4">
+              <div class="skill-category-card">
+                <div class="skill-category-header">
+                  <div class="skill-category-icon">
+                    <i class="fas fa-network-wired"></i>
+                  </div>
+                  <div>
+                    <h3 class="skill-category-title">Networking & Protocols</h3>
+                    <div class="skill-category-subtitle">PACKET & TRAFFIC ANALYSIS</div>
+                  </div>
+                </div>
+                <div class="skill-badges-grid">
+                  <span class="interactive-skill-badge" title="Packet capture & deep inspection"><i class="fas fa-water text-cyan"></i> Wireshark</span>
+                  <span class="interactive-skill-badge" title="Protocol stack & routing"><i class="fas fa-project-diagram text-cyan"></i> TCP/IP</span>
+                  <span class="interactive-skill-badge" title="DNS records & zone transfers"><i class="fas fa-server text-cyan"></i> DNS</span>
+                  <span class="interactive-skill-badge" title="Web protocol headers & TLS inspection"><i class="fas fa-lock text-cyan"></i> HTTP/HTTPS</span>
+                  <span class="interactive-skill-badge" title="File transfer protocol auditing"><i class="fas fa-exchange-alt text-cyan"></i> FTP</span>
+                  <span class="interactive-skill-badge" title="Secure shell authentication & tunneling"><i class="fas fa-terminal text-cyan"></i> SSH</span>
+                  <span class="interactive-skill-badge" title="Server message block enumeration"><i class="fas fa-share-alt text-cyan"></i> SMB</span>
+                  <span class="interactive-skill-badge" title="Encrypted tunneling configurations"><i class="fas fa-user-shield text-cyan"></i> VPN</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Operating Systems & Lab Env -->
+            <div class="col-md-6 col-lg-4">
+              <div class="skill-category-card">
+                <div class="skill-category-header">
+                  <div class="skill-category-icon">
+                    <i class="fas fa-laptop-code"></i>
+                  </div>
+                  <div>
+                    <h3 class="skill-category-title">Operating Systems</h3>
+                    <div class="skill-category-subtitle">SECURITY TESTING ENVIRONMENTS</div>
+                  </div>
+                </div>
+                <div class="skill-badges-grid">
+                  <span class="interactive-skill-badge" title="Primary pentesting OS"><i class="fab fa-linux text-cyan"></i> Kali Linux</span>
+                  <span class="interactive-skill-badge" title="Linux administration & server testing"><i class="fab fa-ubuntu text-cyan"></i> Ubuntu Linux</span>
+                  <span class="interactive-skill-badge" title="Windows client & event log inspection"><i class="fab fa-windows text-cyan"></i> Windows 10 / 11</span>
+                  <span class="interactive-skill-badge" title="Virtual machine network isolation"><i class="fas fa-boxes text-cyan"></i> VirtualBox / VMware</span>
+                  <span class="interactive-skill-badge" title="Command line mastery & pipes"><i class="fas fa-terminal text-cyan"></i> Bash</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Scripting & Automation -->
+            <div class="col-md-6 col-lg-4">
+              <div class="skill-category-card">
+                <div class="skill-category-header">
+                  <div class="skill-category-icon">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div>
+                    <h3 class="skill-category-title">Scripting & Automation</h3>
+                    <div class="skill-category-subtitle">SECURITY TOOLING & ANALYSIS</div>
+                  </div>
+                </div>
+                <div class="skill-badges-grid">
+                  <span class="interactive-skill-badge" title="Automation, scrapers & exploit scripts"><i class="fab fa-python text-cyan"></i> Python</span>
+                  <span class="interactive-skill-badge" title="Windows automation & API bots"><i class="fas fa-scroll text-cyan"></i> PowerShell</span>
+                  <span class="interactive-skill-badge" title="Low-level memory & systems programming"><i class="fas fa-microchip text-cyan"></i> C</span>
+                  <span class="interactive-skill-badge" title="Systems algorithms & problem solving"><i class="fas fa-cubes text-cyan"></i> C++</span>
+                  <span class="interactive-skill-badge" title="Version control & security writeups"><i class="fab fa-git-alt text-cyan"></i> Git & GitHub</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           7. FEATURED PROJECTS
+           ========================================================================== -->
+      <section id="projects" class="projects-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Security Engineering</span>
+            <h2 class="section-title">FEATURED SECURITY PROJECTS</h2>
+            <p class="section-description mx-auto">
+              Real-world cybersecurity applications, threat intelligence bots, lab architectures, and software supply chain security research.
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <!-- Project 01: CyberJobBot -->
+            <div class="col-lg-6">
+              <div class="project-card">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-num">PROJECT_01</span>
+                    <span class="project-cat-badge">Automation & Intelligence</span>
+                  </div>
+                  <h3 class="project-title">CyberJobBot</h3>
+                  <p class="project-desc">
+                    A PowerShell-based cybersecurity threat intelligence and career monitoring daemon that autonomously collects security role postings, parses structured metadata, executes regex-based relevance scoring (SOC, Pentest, SIEM), prevents duplicate alerts via hash comparison, and dispatches real-time alerts via Telegram Bot API.
+                  </p>
+                  <div class="project-tech-stack">
+                    <span class="tech-chip">PowerShell</span>
+                    <span class="tech-chip">Telegram API</span>
+                    <span class="tech-chip">JSON Parsing</span>
+                    <span class="tech-chip">RegEx Filtering</span>
+                    <span class="tech-chip">Relevance Scoring</span>
+                    <span class="tech-chip">Deduplication</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <a href="https://github.com/Murad734138/CyberJobBot" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
+                    <i class="fab fa-github"></i> GitHub
+                  </a>
+                  <button type="button" class="btn btn-cyber-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#projectDetailModal" data-project-id="cyberjobbot">
+                    <i class="fas fa-info-circle"></i> View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 02: THM & VulnHub Security Lab Portfolio -->
+            <div class="col-lg-6">
+              <div class="project-card">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-num">PROJECT_02</span>
+                    <span class="project-cat-badge">Offensive Labs & Pentesting</span>
+                  </div>
+                  <h3 class="project-title">TryHackMe & VulnHub Security Lab Portfolio</h3>
+                  <p class="project-desc">
+                    Extensive hands-on offensive security portfolio spanning 120+ rooms and vulnerable VMs covering network enumeration, service reconnaissance, vulnerability identification, web exploitation (OWASP Top 10), Linux/Windows privilege escalation, and structured technical reporting with remediation blueprints.
+                  </p>
+                  <div class="project-tech-stack">
+                    <span class="tech-chip">120+ THM Rooms</span>
+                    <span class="tech-chip">Burp Suite</span>
+                    <span class="tech-chip">Nmap</span>
+                    <span class="tech-chip">LinPEAS</span>
+                    <span class="tech-chip">Metasploit</span>
+                    <span class="tech-chip">PrivEsc</span>
+                    <span class="tech-chip">OWASP</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
+                    <i class="fab fa-github"></i> Writeups
+                  </a>
+                  <button type="button" class="btn btn-cyber-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#projectDetailModal" data-project-id="thm-portfolio">
+                    <i class="fas fa-info-circle"></i> View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 03: Home Penetration Testing Lab -->
+            <div class="col-lg-6">
+              <div class="project-card">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-num">PROJECT_03</span>
+                    <span class="project-cat-badge">Virtual Lab Architecture</span>
+                  </div>
+                  <h3 class="project-title">Home Penetration Testing & Defense Lab</h3>
+                  <p class="project-desc">
+                    Isolated multi-host virtual cybersecurity lab environment architected for safe exploitation testing, network pivot simulations, packet capture inspection, and defensive log analysis across isolated Kali Linux attack machines and vulnerable Windows/Linux targets.
+                  </p>
+                  <div class="project-tech-stack">
+                    <span class="tech-chip">Kali Linux</span>
+                    <span class="tech-chip">Ubuntu Server</span>
+                    <span class="tech-chip">Windows VMs</span>
+                    <span class="tech-chip">VirtualBox / VMware</span>
+                    <span class="tech-chip">Wireshark</span>
+                    <span class="tech-chip">Host Isolation</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
+                    <i class="fab fa-github"></i> Lab Specs
+                  </a>
+                  <button type="button" class="btn btn-cyber-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#projectDetailModal" data-project-id="home-lab">
+                    <i class="fas fa-info-circle"></i> View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 04: Malicious Package Detection Research -->
+            <div class="col-lg-6">
+              <div class="project-card">
+                <div>
+                  <div class="project-top-meta">
+                    <span class="project-num">PROJECT_04</span>
+                    <span class="project-cat-badge">Software Supply Chain Security</span>
+                  </div>
+                  <h3 class="project-title">Malicious Package Detection Research</h3>
+                  <p class="project-desc">
+                    Undergraduate capstone research investigating machine learning and static code analysis pipelines to identify poisoned open-source dependencies (npm, PyPI) exhibiting obfuscated payloads, suspicious network beacons, or typosquatting behaviors.
+                  </p>
+                  <div class="project-tech-stack">
+                    <span class="tech-chip">Python</span>
+                    <span class="tech-chip">Static Analysis</span>
+                    <span class="tech-chip">AST Parsing</span>
+                    <span class="tech-chip">Machine Learning</span>
+                    <span class="tech-chip">Malware Heuristics</span>
+                    <span class="tech-chip">Research</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <a href="#research" class="btn btn-cyber-primary btn-sm">
+                    <i class="fas fa-book-reader"></i> Research Section
+                  </a>
+                  <button type="button" class="btn btn-cyber-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#projectDetailModal" data-project-id="malicious-package">
+                    <i class="fas fa-info-circle"></i> View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           8. HANDS-ON LABS ("THE LAB")
+           ========================================================================== -->
+      <section id="labs" class="labs-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Practical Mastery</span>
+            <h2 class="section-title">THE LAB &bull; HANDS-ON PRACTICE</h2>
+            <p class="section-description mx-auto">
+              Interactive index of cybersecurity challenge domains and simulated target environments practiced across 120+ TryHackMe rooms and VulnHub virtual machines.
+            </p>
+          </div>
+
+          <!-- Filter Controls -->
+          <div class="lab-filter-controls justify-content-center">
+            <button type="button" class="lab-filter-btn active" data-filter="all">All Domains</button>
+            <button type="button" class="lab-filter-btn" data-filter="web">Web Security</button>
+            <button type="button" class="lab-filter-btn" data-filter="network">Network Security</button>
+            <button type="button" class="lab-filter-btn" data-filter="linux">Linux</button>
+            <button type="button" class="lab-filter-btn" data-filter="windows">Windows</button>
+            <button type="button" class="lab-filter-btn" data-filter="privesc">Privilege Escalation</button>
+            <button type="button" class="lab-filter-btn" data-filter="api">API Security</button>
+            <button type="button" class="lab-filter-btn" data-filter="ctf">CTF</button>
+            <button type="button" class="lab-filter-btn" data-filter="osint">OSINT</button>
+          </div>
+
+          <!-- Labs Grid -->
+          <div class="row g-4" id="labsContainer">
+            <!-- Lab 1: Web App Security -->
+            <div class="col-md-6 col-lg-4 lab-card-wrapper" data-category="web ctf">
+              <div class="lab-card">
+                <div>
+                  <div class="lab-meta-header">
+                    <span class="lab-platform-tag">TRYHACKME / CTF</span>
+                    <span class="lab-status-badge"><i class="fas fa-check-circle me-1"></i>COMPLETED</span>
+                  </div>
+                  <h4 class="lab-name">OWASP Top 10 Web Exploitation</h4>
+                  <p class="lab-skill-gained">
+                    Hands-on exploitation of SQLi (union-based, blind), stored/reflected XSS, IDOR, and broken access controls.
+                  </p>
+                  <div class="lab-tools-list">
+                    <span class="tech-chip">Burp Suite</span>
+                    <span class="tech-chip">SQLMap</span>
+                    <span class="tech-chip">Browser DevTools</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                  <span class="font-mono text-muted small">Category: Web</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="font-mono small text-cyan">Writeup <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab 2: Linux PrivEsc -->
+            <div class="col-md-6 col-lg-4 lab-card-wrapper" data-category="linux privesc">
+              <div class="lab-card">
+                <div>
+                  <div class="lab-meta-header">
+                    <span class="lab-platform-tag">VULNHUB / THM</span>
+                    <span class="lab-status-badge"><i class="fas fa-check-circle me-1"></i>COMPLETED</span>
+                  </div>
+                  <h4 class="lab-name">Linux Privilege Escalation</h4>
+                  <p class="lab-skill-gained">
+                    Auditing SUID binaries, misconfigured sudoers rules, writable cron jobs, wildcard injection, and kernel vulnerabilities.
+                  </p>
+                  <div class="lab-tools-list">
+                    <span class="tech-chip">LinPEAS</span>
+                    <span class="tech-chip">Bash</span>
+                    <span class="tech-chip">GTFOBins</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                  <span class="font-mono text-muted small">Category: Linux PrivEsc</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="font-mono small text-cyan">Writeup <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab 3: Network Reconnaissance -->
+            <div class="col-md-6 col-lg-4 lab-card-wrapper" data-category="network">
+              <div class="lab-card">
+                <div>
+                  <div class="lab-meta-header">
+                    <span class="lab-platform-tag">TRYHACKME / LAB</span>
+                    <span class="lab-status-badge"><i class="fas fa-check-circle me-1"></i>COMPLETED</span>
+                  </div>
+                  <h4 class="lab-name">Network Scanning & Service Fingerprinting</h4>
+                  <p class="lab-skill-gained">
+                    TCP SYN scans, UDP service probing, NSE scripting, firewall evasion, banner grabbing, and SMB/NFS share enumeration.
+                  </p>
+                  <div class="lab-tools-list">
+                    <span class="tech-chip">Nmap</span>
+                    <span class="tech-chip">Rustscan</span>
+                    <span class="tech-chip">Wireshark</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                  <span class="font-mono text-muted small">Category: Network</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="font-mono small text-cyan">Writeup <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab 4: Windows Security -->
+            <div class="col-md-6 col-lg-4 lab-card-wrapper" data-category="windows privesc">
+              <div class="lab-card">
+                <div>
+                  <div class="lab-meta-header">
+                    <span class="lab-platform-tag">TRYHACKME</span>
+                    <span class="lab-status-badge"><i class="fas fa-check-circle me-1"></i>COMPLETED</span>
+                  </div>
+                  <h4 class="lab-name">Windows Fundamentals & PrivEsc</h4>
+                  <p class="lab-skill-gained">
+                    Unquoted service paths, AlwaysInstallElevated registry keys, token impersonation, and Windows Event Log inspection.
+                  </p>
+                  <div class="lab-tools-list">
+                    <span class="tech-chip">PowerShell</span>
+                    <span class="tech-chip">WinPEAS</span>
+                    <span class="tech-chip">Event Viewer</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                  <span class="font-mono text-muted small">Category: Windows</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="font-mono small text-cyan">Writeup <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab 5: API Security -->
+            <div class="col-md-6 col-lg-4 lab-card-wrapper" data-category="api web">
+              <div class="lab-card">
+                <div>
+                  <div class="lab-meta-header">
+                    <span class="lab-platform-tag">THM / APIS</span>
+                    <span class="lab-status-badge"><i class="fas fa-check-circle me-1"></i>COMPLETED</span>
+                  </div>
+                  <h4 class="lab-name">REST API Security & JWT Testing</h4>
+                  <p class="lab-skill-gained">
+                    Broken Object Level Authorization (BOLA/IDOR), rate limit bypasses, excessive data exposure, and JWT algorithm tampering.
+                  </p>
+                  <div class="lab-tools-list">
+                    <span class="tech-chip">Postman</span>
+                    <span class="tech-chip">Burp Suite</span>
+                    <span class="tech-chip">JWT.io</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                  <span class="font-mono text-muted small">Category: API Security</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="font-mono small text-cyan">Writeup <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab 6: OSINT & Threat Intel -->
+            <div class="col-md-6 col-lg-4 lab-card-wrapper" data-category="osint ctf">
+              <div class="lab-card">
+                <div>
+                  <div class="lab-meta-header">
+                    <span class="lab-platform-tag">CTF / OSINT</span>
+                    <span class="lab-status-badge"><i class="fas fa-check-circle me-1"></i>COMPLETED</span>
+                  </div>
+                  <h4 class="lab-name">OSINT & Digital Reconnaissance</h4>
+                  <p class="lab-skill-gained">
+                    Domain intelligence gathering, DNS historical lookup, metadata extraction from documents/images, and open-source mapping.
+                  </p>
+                  <div class="lab-tools-list">
+                    <span class="tech-chip">ExifTool</span>
+                    <span class="tech-chip">Whois</span>
+                    <span class="tech-chip">Sublist3r</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                  <span class="font-mono text-muted small">Category: OSINT</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="font-mono small text-cyan">Writeup <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           9. CTF & ACHIEVEMENTS
+           ========================================================================== -->
+      <section id="ctf" class="ctf-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Competition Record</span>
+            <h2 class="section-title">CTF & COMPETITION RECORD</h2>
+            <p class="section-description mx-auto">
+              Competitive cybersecurity accomplishments solving real-time security challenges under time constraints in national hackathons and CTF arenas.
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <!-- Achievement 1 -->
+            <div class="col-lg-4">
+              <div class="achievement-card">
+                <div class="achievement-badge-top">
+                  <i class="fas fa-trophy"></i> 6TH PLACE GRAND FINALE
+                </div>
+                <h3 class="achievement-title">EWU National RoboFest 2026 CTF</h3>
+                <div class="achievement-subtitle">Team Bit Bakers &bull; Top 40 Finalists</div>
+                <p class="achievement-desc">
+                  Ranked 6th in the grand finale among 40 top finalist teams across universities in Bangladesh, solving multi-category challenges in web security, cryptography, reverse engineering, and OSINT.
+                </p>
+                <div class="font-mono text-muted small mt-3">
+                  <i class="fas fa-calendar-alt me-1 text-cyan"></i> Year: 2026 &bull; Finalist
+                </div>
+              </div>
+            </div>
+
+            <!-- Achievement 2 -->
+            <div class="col-lg-4">
+              <div class="achievement-card">
+                <div class="achievement-badge-top" style="color: var(--cyber-cyan); background: rgba(56, 189, 248, 0.1); border-color: var(--border-accent);">
+                  <i class="fas fa-medal"></i> GRAND FINALE QUALIFIER
+                </div>
+                <h3 class="achievement-title">Cybernauts 2026 CTF</h3>
+                <div class="achievement-subtitle">Represented MBSTU Onsite</div>
+                <p class="achievement-desc">
+                  Successfully qualified through the preliminary elimination stages to represent Mawlana Bhashani Science and Technology University in the national onsite Grand Finale competition.
+                </p>
+                <div class="font-mono text-muted small mt-3">
+                  <i class="fas fa-university me-1 text-cyan"></i> MBSTU Team Representative
+                </div>
+              </div>
+            </div>
+
+            <!-- Achievement 3 -->
+            <div class="col-lg-4">
+              <div class="achievement-card">
+                <div class="achievement-badge-top" style="color: var(--cyber-green); background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3);">
+                  <i class="fas fa-globe"></i> TOP 3% WORLDWIDE
+                </div>
+                <h3 class="achievement-title">TryHackMe Global Standing</h3>
+                <div class="achievement-subtitle">120+ Rooms Completed</div>
+                <p class="achievement-desc">
+                  Demonstrated continuous learning consistency across offensive rooms, Linux security, Windows fundamentals, web vulnerabilities, and defensive concepts, earning a place in the global top 3% percentile.
+                </p>
+                <div class="font-mono text-muted small mt-3">
+                  <i class="fas fa-award me-1 text-cyan"></i> Continuous Practice
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Challenge Domains Breakdown -->
+          <div class="row mt-5">
+            <div class="col-12">
+              <h3 class="h5 text-bright font-mono mb-3 text-center">[ CTF CHALLENGE DOMAINS ]</h3>
+              <div class="ctf-domains-grid">
+                <div class="ctf-domain-item">
+                  <i class="fas fa-globe ctf-domain-icon"></i>
+                  <div class="ctf-domain-name">Web Security</div>
+                  <div class="ctf-domain-status">SQLi, XSS, SSRF, Auth</div>
+                </div>
+                <div class="ctf-domain-item">
+                  <i class="fas fa-cogs ctf-domain-icon"></i>
+                  <div class="ctf-domain-name">Reverse Eng</div>
+                  <div class="ctf-domain-status">Ghidra, Strings, Disasm</div>
+                </div>
+                <div class="ctf-domain-item">
+                  <i class="fas fa-bug ctf-domain-icon"></i>
+                  <div class="ctf-domain-name">Binary Exploitation</div>
+                  <div class="ctf-domain-status">Buffer Overflow, Logic</div>
+                </div>
+                <div class="ctf-domain-item">
+                  <i class="fas fa-key ctf-domain-icon"></i>
+                  <div class="ctf-domain-name">Cryptography</div>
+                  <div class="ctf-domain-status">Ciphers, RSA, Hashes</div>
+                </div>
+                <div class="ctf-domain-item">
+                  <i class="fab fa-linux ctf-domain-icon"></i>
+                  <div class="ctf-domain-name">Linux Forensics</div>
+                  <div class="ctf-domain-status">PrivEsc, Logs, Artifacts</div>
+                </div>
+                <div class="ctf-domain-item">
+                  <i class="fas fa-search ctf-domain-icon"></i>
+                  <div class="ctf-domain-name">OSINT</div>
+                  <div class="ctf-domain-status">Geo, Metadata, Intel</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Local Photo Integration -->
+          <div class="row g-4 mt-3">
+            <div class="col-md-6">
+              <div class="ctf-gallery-img-wrapper">
+                <img src="./gallery/photo1.jpg" alt="Team Work & Academic Journey" class="ctf-gallery-img" />
+                <div class="ctf-img-caption">
+                  <i class="fas fa-users text-cyan me-1"></i> Collaborative Team Projects & Academic Activities &bull; MBSTU
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="ctf-gallery-img-wrapper">
+                <img src="./gallery/photo2.jpg" alt="CTF Competition & Technical Participation" class="ctf-gallery-img" />
+                <div class="ctf-img-caption">
+                  <i class="fas fa-laptop-code text-cyan me-1"></i> Technical Preparation & Competitive Problem Solving
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           10. DEFENDING THE STACK (BLUE TEAM / SOC SECTION)
+           ========================================================================== -->
+      <section id="soc" class="soc-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Defensive Operations</span>
+            <h2 class="section-title">DEFENDING THE STACK &bull; BLUE TEAM & SOC</h2>
+            <p class="section-description mx-auto">
+              Bridging offensive insights into defensive operations: telemetry monitoring, alert triage, incident analysis, and MITRE ATT&CK mitigation.
+            </p>
+            <div class="soc-disclaimer-badge">
+              <i class="fas fa-info-circle"></i> <span>UI DEMO / SIMULATION CONCEPT &bull; Interactive SOC Analyst Workstation</span>
+            </div>
+          </div>
+
+          <div class="soc-dashboard-container">
+            <!-- Top Dashboard Header -->
+            <div class="soc-dashboard-header">
+              <div class="soc-header-left">
+                <span class="soc-pulse-indicator"></span>
+                <span class="text-bright font-bold">SOC_MONITOR &bull; LIVE TELEMETRY CONSOLE</span>
+              </div>
+              <div class="font-mono text-muted d-none d-sm-block">
+                <span>SIMULATED_SENSOR: SENSOR-CLUSTER-04</span>
+              </div>
+            </div>
+
+            <!-- Metric Summary Row -->
+            <div class="soc-metrics-row">
+              <div class="soc-metric-box">
+                <div class="soc-metric-label">Incoming Events (24h)</div>
+                <div class="soc-metric-value text-cyan">148,290</div>
+              </div>
+              <div class="soc-metric-box">
+                <div class="soc-metric-label">Active Alerts Triaged</div>
+                <div class="soc-metric-value text-warning">4 Active</div>
+              </div>
+              <div class="soc-metric-box">
+                <div class="soc-metric-label">Mean Time to Triage</div>
+                <div class="soc-metric-value text-success">&lt; 4.2 min</div>
+              </div>
+              <div class="soc-metric-box">
+                <div class="soc-metric-label">MITRE Coverage</div>
+                <div class="soc-metric-value text-bright">Initial / Exfil</div>
+              </div>
+            </div>
+
+            <!-- Body Grid: Alert Feed (Left) & Investigation Console (Right) -->
+            <div class="soc-body-grid">
+              <!-- Left: Interactive Alert Feed -->
+              <div class="soc-feed-col">
+                <div class="soc-feed-title">
+                  <span><i class="fas fa-bell text-warning me-1"></i> SIMULATED ALERT QUEUE (CLICK TO TRIAGE)</span>
+                  <span class="badge bg-secondary">4 ITEMS</span>
+                </div>
+
+                <!-- Alert 1 -->
+                <div class="soc-alert-item active sev-high" data-alert-id="alert-1">
+                  <div class="soc-alert-header">
+                    <span class="text-muted">SEC-2026-8941</span>
+                    <span class="soc-sev-tag high">HIGH</span>
+                  </div>
+                  <div class="soc-alert-title">Repeated SSH Authentication Failures</div>
+                  <div class="soc-alert-meta">Src: 198.51.100.42 &bull; Target: srv-prod-ssh01 &bull; 2m ago</div>
+                </div>
+
+                <!-- Alert 2 -->
+                <div class="soc-alert-item sev-critical" data-alert-id="alert-2">
+                  <div class="soc-alert-header">
+                    <span class="text-muted">SEC-2026-8942</span>
+                    <span class="soc-sev-tag critical">CRITICAL</span>
+                  </div>
+                  <div class="soc-alert-title">SQL Injection Payload on /api/v1/auth</div>
+                  <div class="soc-alert-meta">Src: 203.0.113.88 &bull; Target: web-gateway-01 &bull; 6m ago</div>
+                </div>
+
+                <!-- Alert 3 -->
+                <div class="soc-alert-item sev-critical" data-alert-id="alert-3">
+                  <div class="soc-alert-header">
+                    <span class="text-muted">SEC-2026-8943</span>
+                    <span class="soc-sev-tag critical">CRITICAL</span>
+                  </div>
+                  <div class="soc-alert-title">Suspicious Encoded PowerShell Execution</div>
+                  <div class="soc-alert-meta">Src: 10.0.8.44 (WS-FIN-09) &bull; Parent: EXCEL.EXE &bull; 14m ago</div>
+                </div>
+
+                <!-- Alert 4 -->
+                <div class="soc-alert-item sev-medium" data-alert-id="alert-4">
+                  <div class="soc-alert-header">
+                    <span class="text-muted">SEC-2026-8944</span>
+                    <span class="soc-sev-tag medium">MEDIUM</span>
+                  </div>
+                  <div class="soc-alert-title">High-Volume Port Scan Detected (Nmap SYN)</div>
+                  <div class="soc-alert-meta">Src: 192.168.10.105 &bull; Target: Subnet 10.0.1.0/24 &bull; 22m ago</div>
+                </div>
+              </div>
+
+              <!-- Right: Investigation Pane -->
+              <div class="soc-investigation-pane">
+                <div class="soc-pane-title">
+                  <i class="fas fa-search-plus text-cyan me-1"></i> ANALYST INVESTIGATION & INCIDENT CARD
+                </div>
+                <div id="socDetailContent" class="soc-investigation-content">
+                  <!-- Dynamically populated via script.js -->
+                  <div class="soc-detail-row">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="soc-detail-label">Incident ID:</span>
+                      <span class="badge bg-warning text-dark text-uppercase font-mono">HIGH SEVERITY</span>
+                    </div>
+                    <div class="soc-detail-val text-cyan">SEC-2026-8941 &mdash; Repeated SSH Authentication Failures (Brute Force)</div>
+                  </div>
+                  
+                  <div class="soc-detail-row">
+                    <span class="soc-detail-label">Timestamp & Source:</span>
+                    <div class="soc-detail-val font-mono">2 mins ago (14:32:09 UTC) | <span class="text-warning">198.51.100.42</span></div>
+                  </div>
+
+                  <div class="soc-detail-row">
+                    <span class="soc-detail-label">Target Asset:</span>
+                    <div class="soc-detail-val font-mono">srv-prod-ssh01 (10.0.4.12:22)</div>
+                  </div>
+
+                  <div class="soc-detail-row">
+                    <span class="soc-detail-label">MITRE ATT&CK Mapping:</span>
+                    <div class="soc-detail-val text-teal font-mono">T1110.001 - Brute Force: Password Guessing</div>
+                  </div>
+
+                  <div class="soc-detail-row">
+                    <span class="soc-detail-label">Observed Raw Log / Payload:</span>
+                    <div class="p-2 mt-1 rounded font-mono text-muted small" style="background: rgba(0,0,0,0.5); word-break: break-all; border: 1px solid var(--border-subtle);">
+                      <code>FAILED_PASSWORD for root from 198.51.100.42 port 49152 ssh2 (280 attempts/min)</code>
+                    </div>
+                  </div>
+
+                  <div class="soc-detail-row mt-3">
+                    <span class="soc-detail-label">Analyst Triage & Next Actions:</span>
+                    <ul class="list-unstyled mt-2 font-mono small text-secondary">
+                      <li><i class="fas fa-shield-alt text-cyan me-2"></i>Apply immediate firewall drop rule on border gateway for IP 198.51.100.42</li>
+                      <li><i class="fas fa-shield-alt text-cyan me-2"></i>Verify root login is strictly disabled in sshd_config (PermitRootLogin no)</li>
+                      <li><i class="fas fa-shield-alt text-cyan me-2"></i>Check /var/log/auth.log for any successful subsequent sessions from subnet</li>
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- projects -->
-    <section id="projects" class="py-5">
+          <div class="text-center mt-4">
+            <p class="font-mono text-muted small">
+              <i class="fas fa-brain text-cyan me-1"></i> Currently expanding my defensive security skills through SOC, SIEM, log analysis, threat detection, and incident response practice.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           11. RESEARCH SECTION
+           ========================================================================== -->
+      <section id="research" class="research-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Academic Research</span>
+            <h2 class="section-title">SECURITY RESEARCH</h2>
+            <p class="section-description mx-auto">
+              Undergraduate thesis research applying static code analysis and machine learning classifiers to defend modern software supply chains.
+            </p>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div class="research-card">
+                <span class="research-topic-badge">
+                  <i class="fas fa-microchip me-1"></i> UNDERGRADUATE RESEARCH TOPIC
+                </span>
+                <h3 class="research-title">
+                  Malicious Package Detection in Open Source Ecosystems Using Static Analysis & Machine Learning
+                </h3>
+                <p class="text-secondary mb-4">
+                  Software supply chain security has emerged as a critical attack surface where adversaries publish malicious packages (via typosquatting, dependency confusion, and credential stealers) into registries like npm and PyPI. This research evaluated automated static triage heuristics combined with supervised machine learning algorithms to detect malicious characteristics before runtime deployment.
+                </p>
+
+                <!-- 4 Research Steps -->
+                <div class="research-steps-grid">
+                  <div class="research-step-item">
+                    <div class="research-step-num">STAGE 01</div>
+                    <h4 class="research-step-title">Threat Modeling</h4>
+                    <p class="research-step-desc">Categorizing supply chain attack vectors: obfuscation, reverse shells, env scraping, and beaconing.</p>
+                  </div>
+
+                  <div class="research-step-item">
+                    <div class="research-step-num">STAGE 02</div>
+                    <h4 class="research-step-title">AST Static Parsing</h4>
+                    <p class="research-step-desc">Extracting Abstract Syntax Tree node metrics, entropy, eval() usage, network calls, and child process spawns.</p>
+                  </div>
+
+                  <div class="research-step-item">
+                    <div class="research-step-num">STAGE 03</div>
+                    <h4 class="research-step-title">ML Classification</h4>
+                    <p class="research-step-desc">Training classifiers (Random Forest, SVM) on labeled datasets of benign and verified malicious packages.</p>
+                  </div>
+
+                  <div class="research-step-item">
+                    <div class="research-step-num">STAGE 04</div>
+                    <h4 class="research-step-title">Defensive Pipeline</h4>
+                    <p class="research-step-desc">Designing early detection metrics for CI/CD dependency review and pre-installation auditing.</p>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 align-items-center pt-3 border-top border-secondary">
+                  <span class="font-mono text-muted small me-2">Broader Research Interests:</span>
+                  <span class="tech-chip">API Security Auditing</span>
+                  <span class="tech-chip">Malware Heuristics</span>
+                  <span class="tech-chip">Threat Detection Rule Engineering</span>
+                  <span class="tech-chip">Security Automation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           12. EDUCATION
+           ========================================================================== -->
+      <section id="education" class="education-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Academic Background</span>
+            <h2 class="section-title">FORMAL EDUCATION</h2>
+            <p class="section-description mx-auto">
+              Academic foundation in computer systems, network protocols, database engineering, and information security.
+            </p>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="education-card">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+                  <h3 class="edu-degree">Bachelor of Science in Information and Communication Technology</h3>
+                  <span class="badge bg-success text-dark font-mono"><i class="fas fa-check-circle me-1"></i>COMPLETED JUNE 2026</span>
+                </div>
+                <div class="edu-institution">
+                  <i class="fas fa-university me-1 text-cyan"></i> Mawlana Bhashani Science and Technology University (MBSTU), Bangladesh
+                </div>
+
+                <div class="edu-meta-row">
+                  <div class="edu-meta-item">
+                    CGPA: <strong>3.56 / 4.00</strong>
+                  </div>
+                  <div class="edu-meta-item">
+                    Session: <strong>2020 &mdash; 2021</strong>
+                  </div>
+                  <div class="edu-meta-item">
+                    Graduation: <strong>June 2026</strong>
+                  </div>
+                </div>
+
+                <p class="text-secondary mb-3">
+                  <strong>Key Security & Technical Courses:</strong> Information & Network Security, Computer Networks, Operating Systems, Database Management Systems, Data Structures & Algorithms, Object-Oriented Programming, Software Engineering.
+                </p>
+
+                <div class="font-mono small text-muted">
+                  <i class="fas fa-certificate text-cyan me-1"></i> Department of Information and Communication Technology
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           13. LEARNING ROADMAP (CURRENT MISSION)
+           ========================================================================== -->
+      <section id="roadmap" class="roadmap-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Strategic Roadmap</span>
+            <h2 class="section-title">CURRENT MISSION &bull; LEARNING ROADMAP</h2>
+            <p class="section-description mx-auto">
+              A structured progression blueprint detailing completed phases and active defensive operations goals.
+            </p>
+          </div>
+
+          <div class="roadmap-grid">
+            <!-- Phase 1: Foundations -->
+            <div class="roadmap-phase-card">
+              <span class="phase-tag completed"><i class="fas fa-check me-1"></i> PHASE 01 &bull; COMPLETE</span>
+              <h3 class="phase-title">Foundations</h3>
+              <ul class="phase-items-list">
+                <li><i class="fas fa-check text-success"></i> TCP/IP, DNS, Protocols</li>
+                <li><i class="fas fa-check text-success"></i> Linux Systems & Bash</li>
+                <li><i class="fas fa-check text-success"></i> Windows Architecture</li>
+                <li><i class="fas fa-check text-success"></i> Network Traffic Analysis</li>
+              </ul>
+            </div>
+
+            <!-- Phase 2: Offensive Security -->
+            <div class="roadmap-phase-card">
+              <span class="phase-tag completed"><i class="fas fa-check me-1"></i> PHASE 02 &bull; COMPLETE</span>
+              <h3 class="phase-title">Offensive Security</h3>
+              <ul class="phase-items-list">
+                <li><i class="fas fa-check text-success"></i> 120+ TryHackMe Labs</li>
+                <li><i class="fas fa-check text-success"></i> OWASP Top 10 Web Audits</li>
+                <li><i class="fas fa-check text-success"></i> Linux/Windows PrivEsc</li>
+                <li><i class="fas fa-check text-success"></i> National CTF Finalist</li>
+              </ul>
+            </div>
+
+            <!-- Phase 3: Defensive Security (ACTIVE) -->
+            <div class="roadmap-phase-card active-phase">
+              <span class="phase-tag active"><i class="fas fa-spinner fa-spin me-1"></i> PHASE 03 &bull; ACTIVE FOCUS</span>
+              <h3 class="phase-title">Defensive Security & SOC</h3>
+              <ul class="phase-items-list">
+                <li><i class="fas fa-arrow-right text-cyan"></i> SOC Alert Triage & Analysis</li>
+                <li><i class="fas fa-arrow-right text-cyan"></i> SIEM Log Aggregation</li>
+                <li><i class="fas fa-arrow-right text-cyan"></i> Incident Response Procedures</li>
+                <li><i class="fas fa-arrow-right text-cyan"></i> MITRE ATT&CK Mapping</li>
+              </ul>
+            </div>
+
+            <!-- Phase 4: Advanced Operations -->
+            <div class="roadmap-phase-card">
+              <span class="phase-tag upcoming">PHASE 04 &bull; ADVANCED</span>
+              <h3 class="phase-title">Advanced Operations</h3>
+              <ul class="phase-items-list">
+                <li><i class="fas fa-circle text-muted font-xs"></i> Threat Hunting Pipelines</li>
+                <li><i class="fas fa-circle text-muted font-xs"></i> Detection Engineering</li>
+                <li><i class="fas fa-circle text-muted font-xs"></i> Cloud Security Auditing</li>
+                <li><i class="fas fa-circle text-muted font-xs"></i> Security Automation Tools</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           14. GITHUB / BUILD IN PUBLIC
+           ========================================================================== -->
+      <section id="github" class="github-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Open Source & Telemetry</span>
+            <h2 class="section-title">BUILD IN PUBLIC &bull; REPOSITORIES</h2>
+            <p class="section-description mx-auto">
+              Security automation tools, lab notes, writeups, and cybersecurity resources documented on GitHub.
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="repo-card">
+                <div>
+                  <h3 class="repo-name"><i class="fab fa-github"></i> CyberJobBot</h3>
+                  <p class="repo-desc">
+                    Automated PowerShell daemon for scraping, scoring, and delivering real-time cybersecurity opportunities via Telegram.
+                  </p>
+                </div>
+                <div class="repo-footer">
+                  <span><i class="fas fa-circle text-primary font-xs me-1"></i> PowerShell</span>
+                  <a href="https://github.com/Murad734138/CyberJobBot" target="_blank" rel="noopener noreferrer" class="text-cyan">View Repo &rarr;</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="repo-card">
+                <div>
+                  <h3 class="repo-name"><i class="fab fa-github"></i> Security-Lab-Writeups</h3>
+                  <p class="repo-desc">
+                    Comprehensive writeups, methodology notes, and remediation guidelines for completed TryHackMe and VulnHub machines.
+                  </p>
+                </div>
+                <div class="repo-footer">
+                  <span><i class="fas fa-circle text-warning font-xs me-1"></i> Markdown</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="text-cyan">View Repo &rarr;</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <div class="repo-card">
+                <div>
+                  <h3 class="repo-name"><i class="fab fa-github"></i> CTF-Challenge-Archive</h3>
+                  <p class="repo-desc">
+                    Exploits, payloads, and cryptographic solution scripts developed during national and online CTF competitions.
+                  </p>
+                </div>
+                <div class="repo-footer">
+                  <span><i class="fas fa-circle text-success font-xs me-1"></i> Python</span>
+                  <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="text-cyan">View Repo &rarr;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           15. CONTACT SECTION
+           ========================================================================== -->
+      <section id="contact" class="contact-section">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span class="section-tag">Direct Channel</span>
+            <h2 class="section-title">LET'S TALK SECURITY</h2>
+            <p class="section-description mx-auto">
+              Interested in cybersecurity collaboration, SOC & security engineering opportunities, CTFs, or research? Let's connect.
+            </p>
+          </div>
+
+          <div class="row justify-content-center g-4">
+            <!-- Left Info Panel -->
+            <div class="col-lg-5">
+              <div class="contact-card h-100 d-flex flex-column justify-content-between">
+                <div>
+                  <h3 class="h4 text-bright mb-4">DIRECT INQUIRIES</h3>
+
+                  <div class="contact-direct-item">
+                    <div class="contact-icon-box">
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                      <div class="contact-item-title">Primary Email</div>
+                      <div class="contact-item-val font-mono small">muraduzzamanasha.job@gmail.com</div>
+                      <button type="button" class="btn btn-cyber-outline btn-sm mt-2 btn-copy-email">
+                        <i class="fas fa-copy me-1"></i> Copy Email
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="contact-direct-item">
+                    <div class="contact-icon-box">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                      <div class="contact-item-title">Location</div>
+                      <div class="contact-item-val">Tangail, Bangladesh</div>
+                      <div class="text-muted small">Open to Remote & Onsite Security Roles</div>
+                    </div>
+                  </div>
+
+                  <div class="contact-direct-item">
+                    <div class="contact-icon-box">
+                      <i class="fas fa-user-check"></i>
+                    </div>
+                    <div>
+                      <div class="contact-item-title">Current Status</div>
+                      <div class="contact-item-val text-success">Available for SOC & Security Engineering Roles</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-3 border-top border-secondary mt-3">
+                  <div class="contact-item-title mb-2">Professional Profiles</div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-outline btn-sm">
+                      <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/muraduzzaman-asha-30077b25a/" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-outline btn-sm">
+                      <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://tryhackme.com" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-outline btn-sm">
+                      <i class="fas fa-shield-virus"></i> TryHackMe
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Contact Form -->
+            <div class="col-lg-7">
+              <div class="contact-card">
+                <h3 class="h4 text-bright mb-4">TRANSMIT A MESSAGE</h3>
+                <form id="securityContactForm">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="contactName" class="form-cyber-label">Your Name *</label>
+                      <input type="text" id="contactName" class="form-cyber-input" placeholder="e.g. John Doe" required />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="contactEmail" class="form-cyber-label">Your Email *</label>
+                      <input type="email" id="contactEmail" class="form-cyber-input" placeholder="name@company.com" required />
+                    </div>
+
+                    <div class="col-12">
+                      <label for="contactSubject" class="form-cyber-label">Subject</label>
+                      <input type="text" id="contactSubject" class="form-cyber-input" placeholder="SOC Role / Security Collaboration / Inquiries" />
+                    </div>
+
+                    <div class="col-12">
+                      <label for="contactMessage" class="form-cyber-label">Message *</label>
+                      <textarea id="contactMessage" rows="5" class="form-cyber-input" placeholder="Enter your inquiry or project details..." required></textarea>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                      <button type="submit" class="btn btn-cyber-primary w-100">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+         16. FOOTER
+         ========================================================================== -->
+    <footer class="footer-custom">
       <div class="container">
-        <div class="text-center mb-5">
-          <h6 class="section-subtitle">My Creations</h6>
-          <h2 class="section-title">Projects</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                class="card-img-top"
-                alt="Online News Portal"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Online News Portal</h5>
-                <p class="card-text">
-                  A dynamic news website with admin panel built using Python
-                  Django framework.
-                </p>
-                <div class="mt-3">
-                  <span class="skill-badge">Python</span>
-                  <span class="skill-badge">Django</span>
-                  <span class="skill-badge">HTML/CSS</span>
-                </div>
-              </div>
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
+            <div class="footer-brand-title">MURADUZZAMAN ASHA</div>
+            <div class="footer-brand-sub">CYBER SECURITY | BLUE TEAM | SOC | SIEM</div>
+            <div class="footer-quote">
+              "Breaking systems to understand them. Building skills to defend them."
             </div>
           </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                class="card-img-top"
-                alt="Match Stick Puzzle"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Match Stick Puzzle Solver</h5>
-                <p class="card-text">
-                  Algorithm to solve classic matchstick puzzles using C++ with
-                  graphical representation.
-                </p>
-                <div class="mt-3">
-                  <span class="skill-badge">C++</span>
-                  <span class="skill-badge">Algorithms</span>
-                  <span class="skill-badge">Problem Solving</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1535914254981-b5012eebbd15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                class="card-img-top"
-                alt="BMI Calculator"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Advanced BMI Calculator</h5>
-                <p class="card-text">
-                  Feature-rich BMI calculator with health recommendations built
-                  using C++.
-                </p>
-                <div class="mt-3">
-                  <span class="skill-badge">C++</span>
-                  <span class="skill-badge">Health Tech</span>
-                  <span class="skill-badge">UI Design</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                class="card-img-top"
-                alt="Number Guess Game"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Number Guess Android Game</h5>
-                <p class="card-text">
-                  Interactive number guessing game with multiple difficulty
-                  levels built with Java.
-                </p>
-                <div class="mt-3">
-                  <span class="skill-badge">Java</span>
-                  <span class="skill-badge">Android</span>
-                  <span class="skill-badge">Game Dev</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                class="card-img-top"
-                alt="Smart Water Tank"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Smart Water Tank (Arduino)</h5>
-                <p class="card-text">
-                  IoT-based water tank monitoring system with automatic pump
-                  control.
-                </p>
-                <div class="mt-3">
-                  <span class="skill-badge">Arduino</span>
-                  <span class="skill-badge">IoT</span>
-                  <span class="skill-badge">Embedded Systems</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- certifications -->
-    <section id="certifications" class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h6 class="section-subtitle">My Achievements</h6>
-          <h2 class="section-title">Certifications</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-6" data-aos="fade-right">
-            <div class="certification-item">
-              <h4>CTF Competition</h4>
-              <p class="certification-date">
-                2024 | SMP cybersecurity
-              </p>
-              <p>
-                Won Certificate in the SMP cybersecurity The Flag competition
-                demonstrating skills in web exploitation, cryptography, and
-                reverse engineering.
-              </p>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="footer-links-row justify-content-center justify-content-md-end">
+              <a href="#home" class="footer-link">Home</a>
+              <a href="#about" class="footer-link">About</a>
+              <a href="#skills" class="footer-link">Stack</a>
+              <a href="#projects" class="footer-link">Projects</a>
+              <a href="#labs" class="footer-link">Labs</a>
+              <a href="#ctf" class="footer-link">CTF</a>
+              <a href="#soc" class="footer-link">SOC</a>
+              <a href="#contact" class="footer-link">Contact</a>
             </div>
-            <div class="certification-item">
-              <h4>CTF Competition</h4>
-              <p class="certification-date">2024 | Meta CTF</p>
-              <p>
-                Won Certificate in the SMP cybersecurity The Flag competition
-                demonstrating skills in web exploitation, cryptography, and
-                reverse engineering.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-6" data-aos="fade-left">
-            <div class="certification-item">
-              <h4>Ethical Hacking Fundamentals</h4>
-              <p class="certification-date">2024 | Udemy</p>
-              <p>
-                Gained knowledge in penetration testing, vulnerability
-                assessment, and security best practices.
-              </p>
-            </div>
-            <div class="certification-item">
-              <h4>Python Development Certification</h4>
-              <p class="certification-date">2025 | Udemy</p>
-              <p>
-                Completed training in mobile app development.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
+            <div class="d-flex justify-content-center justify-content-md-end gap-3 mt-3">
+              <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="hero-social-link"><i class="fab fa-github"></i> GitHub</a>
+              <a href="https://www.linkedin.com/in/muraduzzaman-asha-30077b25a/" target="_blank" rel="noopener noreferrer" class="hero-social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+              <a href="mailto:muraduzzamanasha.job@gmail.com" class="hero-social-link"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+          </div>
+        </div>
 
-    <!-- gallery -->
-    <section id="gallery" class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h6 class="section-subtitle">My Journey</h6>
-          <h2 class="section-title">Gallery</h2>
+        <div class="footer-bottom-bar">
+          <div>&copy; 2026 Muraduzzaman Asha &bull; Secured with Intent</div>
+          <div>B.Sc. in ICT &bull; Mawlana Bhashani Science and Technology University</div>
         </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in">
-            <div class="gallery-item">
-              <img
-                src="./gallery/photo1.jpg"
-                alt="Team Project"
-              />
-              <div class="gallery-caption">
-                <h5>Team Project Work</h5>
-                <p>My tour Picture</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="zoom-in"
-            data-aos-delay="100"
-          >
-            <div class="gallery-item">
-              <img
-                src="./gallery/photo2.jpg"
-                alt="CTF Competition"
-              />
-              <div class="gallery-caption">
-                <h5>CTF Competition</h5>
-                <p>veiw in fresh mind</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="zoom-in"
-            data-aos-delay="200"
-          >
-            <div class="gallery-item">
-              <img
-                src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                alt="University Event"
-              />
-              <div class="gallery-caption">
-                <h5>University Tech Fest</h5>
-                <p>Presenting my project at annual technology festival</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in">
-            <div class="gallery-item">
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                alt="Coding Workshop"
-              />
-              <div class="gallery-caption">
-                <h5>Coding Workshop</h5>
-                <p>Conducting a workshop for junior students</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="zoom-in"
-            data-aos-delay="100"
-          >
-            <div class="gallery-item">
-              <img
-                src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                alt="Project Demo"
-              />
-              <div class="gallery-caption">
-                <h5>Project Demonstration</h5>
-                <p>Showing my Arduino project to faculty members</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-4"
-            data-aos="zoom-in"
-            data-aos-delay="200"
-          >
-            <div class="gallery-item">
-              <img
-                src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                alt="University Campus"
-              />
-              <div class="gallery-caption">
-                <h5>University Campus</h5>
-                <p>MBSTU campus where I spend my academic life</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- contact -->
-    <section id="contact" class="py-5 bg-light">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h6 class="section-subtitle">Get In Touch</h6>
-          <h2 class="section-title">Contact Me</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-7 mb-5 mb-lg-0">
-            <form>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Name"
-                    required
-                  />
-                </div>
-                <div class="col-md-6 mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Your Email"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Subject" />
-              </div>
-              <div class="mb-3">
-                <textarea
-                  class="form-control"
-                  rows="5"
-                  placeholder="Your Message"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">
-                Send Message
-              </button>
-            </form>
-          </div>
-          <div class="col-lg-5">
-            <div class="contact-info">
-              <h5 class="mb-4">Contact Information</h5>
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-map-marker-alt contact-icon"></i>
-                <p class="mb-0">
-                  Mawlana Bhashani Science and Technology University, Tangail,
-                  Bangladesh
-                </p>
-              </div>
-              <div class="d-flex align-items-center mb-3">
-                <i class="fas fa-phone contact-icon"></i>
-                <p class="mb-0">01761-174373</p>
-              </div>
-              <div class="d-flex align-items-center mb-4">
-                <i class="fas fa-envelope contact-icon"></i>
-                <p class="mb-0">muraduzzamanasha@gmail.com</p>
-              </div>
-              <h5 class="mb-3">Follow Me</h5>
-              <div>
-                <a href="https://github.com/Murad734138" target="_blank" class="social-icon-about"
-                  ><i class="fab fa-github"></i
-                ></a>
-                <a href="https://www.linkedin.com/in/muraduzzaman-asha-30077b25a/" target="_blank" class="social-icon-about"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-                <!-- <a href="#" class="social-icon-about"
-                  ><i class="fab fa-twitter"></i
-                ></a> -->
-                <a href="https://www.facebook.com/muraduzzaman.asha" target="_blank" class="social-icon-about"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- footer -->
-    <footer class="text-center py-5">
-      <div class="container">
-        <a class="mb-4 footer-title" href="#">Muraduzzaman Asha</a>
-        <div class="footer-links mb-4">
-          <a href="#">Home</a>
-          <a href="#about">About</a>
-          <a href="#education">Education</a>
-          <a href="#projects">Projects</a>
-          <a href="#certifications">Certifications</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="social-icons mb-4">
-          <a href="https://github.com/Murad734138" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/muraduzzaman-asha-30077b25a/" target="_blank" class="social-icon" ><i class="fab fa-linkedin-in"></i></a>
-          <!-- <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a> -->
-          <a href="https://www.facebook.com/muraduzzaman.asha" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-        </div>
-        <p class="mb-0">&copy; 2025 Muraduzzaman Asha. All rights reserved.</p>
       </div>
     </footer>
 
-    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </a>
 
+    <!-- ==========================================================================
+         PROJECT DETAIL MODAL
+         ========================================================================== -->
+    <div class="modal fade" id="projectDetailModal" tabindex="-1" aria-labelledby="modalProjectTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content modal-cyber-content">
+          <div class="modal-cyber-header d-flex justify-content-between align-items-center">
+            <div>
+              <span id="modalProjectCat" class="badge bg-dark text-cyan font-mono border border-secondary mb-1">CATEGORY</span>
+              <h3 class="modal-title h5 text-bright" id="modalProjectTitle">Project Title</h3>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-cyber-body">
+            <div class="modal-sec-block">
+              <div class="modal-sec-label"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+              <p id="modalProjectProblem" class="text-secondary small mb-0"></p>
+            </div>
+
+            <div class="modal-sec-block">
+              <div class="modal-sec-label"><i class="fas fa-cogs"></i> Technical Approach & Architecture</div>
+              <p id="modalProjectApproach" class="text-secondary small mb-0"></p>
+            </div>
+
+            <div class="modal-sec-block">
+              <div class="modal-sec-label"><i class="fas fa-tools"></i> Security Toolchain & Technologies</div>
+              <div id="modalProjectTools" class="d-flex flex-wrap gap-1"></div>
+            </div>
+
+            <div class="modal-sec-block">
+              <div class="modal-sec-label"><i class="fas fa-lightbulb"></i> Key Learnings & Defensive Insights</div>
+              <p id="modalProjectLearnings" class="text-secondary small mb-0"></p>
+            </div>
+          </div>
+
+          <div class="modal-cyber-footer d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn-cyber-outline btn-sm" data-bs-dismiss="modal">Close</button>
+            <a href="#" id="modalProjectGithub" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
+              <i class="fab fa-github me-1"></i> View Repository
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      // Initialize AOS animation
-      AOS.init({
-        duration: 800,
-        easing: "ease-in-out",
-        once: true,
-      });
 
-      // Navbar scroll effect
-      window.addEventListener("scroll", function () {
-        const navbar = document.querySelector(".navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      });
-
-      // Back to top button
-      const backToTopButton = document.querySelector(".back-to-top");
-      window.addEventListener("scroll", function () {
-        if (window.scrollY > 300) {
-          backToTopButton.classList.add("active");
-        } else {
-          backToTopButton.classList.remove("active");
-        }
-      });
-
-      backToTopButton.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
-    </script>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
   </body>
 </html>
