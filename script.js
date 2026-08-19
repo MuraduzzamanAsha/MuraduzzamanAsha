@@ -784,80 +784,167 @@ Available Commands:
   });
 
   // ==========================================================================
-  // CV VIEWER MODAL & MULTI-STRATEGY DOWNLOAD SYSTEM (GITHUB PAGES COMPATIBLE)
+  // CV VIEWER MODAL & HIGH-RESOLUTION PDF.JS RENDERER (GITHUB PAGES & CROSS-PLATFORM)
   // ==========================================================================
   const STATIC_CV_PATH = './cv/Muraduzzaman_Asha_CV.pdf';
-  const CV_FILENAME = 'Muraduzzaman_Asha_CV.pdf';
   const cvViewerModalEl = document.getElementById('cvViewerModal');
-  const btnModalDirectDownload = document.getElementById('btnModalDirectDownload');
   const btnModalCopyLink = document.getElementById('btnModalCopyLink');
   const btnModalNewTab = document.getElementById('btnModalNewTab');
+  const pdfCanvasContainer = document.getElementById('pdfCanvasContainer');
+  const cvModalPdfIframe = document.getElementById('cvModalPdfIframe');
+  const btnPdfZoomIn = document.getElementById('btnPdfZoomIn');
+  const btnPdfZoomOut = document.getElementById('btnPdfZoomOut');
+  const btnPdfZoomReset = document.getElementById('btnPdfZoomReset');
+  const pdfZoomLevelEl = document.getElementById('pdfZoomLevel');
 
-  function triggerGuaranteedDownload() {
-    // 1. Fetch static file as Blob (100% works on GitHub Pages, Netlify, Vercel, Localhost & Cloud Run)
-    fetch(STATIC_CV_PATH)
-      .then(res => {
-        if (!res.ok) throw new Error('Static fetch failed');
-        return res.blob();
-      })
-      .then(blob => {
-        const blobUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = blobUrl;
-        a.download = CV_FILENAME;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => {
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(blobUrl);
-        }, 400);
-      })
-      .catch(() => {
-        // Fallback: direct anchor navigation
-        const fallbackA = document.createElement('a');
-        fallbackA.href = STATIC_CV_PATH;
-        fallbackA.download = CV_FILENAME;
-        fallbackA.target = '_blank';
-        document.body.appendChild(fallbackA);
-        fallbackA.click();
-        document.body.removeChild(fallbackA);
-      });
+  let currentPdfDoc = null;
+  let currentPdfScale = 1.25;
+  let isPdfRendering = false;
+
+  // Initialize PDF.js worker
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 
-  // Navbar and Hero CV click handlers
-  const cvTriggers = document.querySelectorAll('a[href*="Muraduzzaman_Asha_CV.pdf"], a[href*="download-cv"], #heroDownloadCvBtn');
-  cvTriggers.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      // Show interactive CV Hub Modal if present
-      if (cvViewerModalEl && typeof bootstrap !== 'undefined') {
-        const bsModal = bootstrap.Modal.getOrCreateInstance(cvViewerModalEl);
-        bsModal.show();
+  async function renderPdfDocument(scale = currentPdfScale) {
+    if (!pdfCanvasContainer || !currentPdfDoc || isPdfRendering) return;
+    isPdfRendering = true;
+
+    try {
+      pdfCanvasContainer.innerHTML = '';
+      if (pdfZoomLevelEl) {
+        pdfZoomLevelEl.textContent = `${Math.round(scale * 80)}%`;
       }
 
-      // Trigger instant download
-      triggerGuaranteedDownload();
+      for (let pageNum = 1; pageNum <= currentPdfDoc.numPages; pageNum++) {
+        const page = await currentPdfDoc.getPage(pageNum);
+        const viewport = page.getViewport({ scale });
 
-      // Visual feedback
-      const originalHtml = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check-circle text-success me-1"></i> Opening CV...';
-      setTimeout(() => {
-        btn.innerHTML = originalHtml;
-      }, 2000);
+        // Page card container
+        const pageWrapper = document.createElement('div');
+        pageWrapper.className = 'pdf-page-card mb-4';
+        pageWrapper.style.position = 'relative';
+        pageWrapper.style.background = '#ffffff';
+        pageWrapper.style.borderRadius = '4px';
+        pageWrapper.style.overflow = 'hidden';
+        pageWrapper.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.6), 0 8px 10px -6px rgba(0,0,0,0.6)';
+
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        // High DPI Display support (retina / 4K)
+        const outputScale = window.devicePixelRatio || 1;
+        canvas.width = Math.floor(viewport.width * outputScale);
+        canvas.height = Math.floor(viewport.height * outputScale);
+        canvas.style.width = Math.floor(viewport.width) + 'px';
+        canvas.style.height = Math.floor(viewport.height) + 'px';
+
+        const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+
+        const renderContext = {
+          canvasContext: context,
+          transform: transform,
+          viewport: viewport
+        };
+
+        const pageBadge = document.createElement('div');
+        pageBadge.className = 'text-center py-1 font-mono text-muted small border-top';
+        pageBadge.style.background = '#f8fafc';
+        pageBadge.textContent = `Page ${pageNum} of ${currentPdfDoc.numPages}`;
+
+        pageWrapper.appendChild(canvas);
+        pageWrapper.appendChild(pageBadge);
+        pdfCanvasContainer.appendChild(pageWrapper);
+
+        await page.render(renderContext).promise;
+      }
+    } catch (err) {
+      console.warn('PDF.js render notice:', err);
+      if (cvModalPdfIframe) {
+        cvModalPdfIframe.style.display = 'block';
+      }
+    } finally {
+      isPdfRendering = false;
+    }
+  }
+
+  async function loadAndDisplayCvPdf() {
+    if (typeof pdfjsLib === 'undefined') {
+      if (cvModalPdfIframe) {
+        cvModalPdfIframe.style.display = 'block';
+      }
+      return;
+    }
+
+    try {
+      const loadingTask = pdfjsLib.getDocument({
+        url: STATIC_CV_PATH,
+        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+        cMapPacked: true
+      });
+
+      currentPdfDoc = await loadingTask.promise;
+      await renderPdfDocument(currentPdfScale);
+    } catch (err) {
+      console.warn('PDF.js document load failed, activating fallback frame:', err);
+      if (cvModalPdfIframe) {
+        cvModalPdfIframe.style.display = 'block';
+      }
+    }
+  }
+
+  // Load PDF when modal opens
+  if (cvViewerModalEl) {
+    cvViewerModalEl.addEventListener('show.bs.modal', () => {
+      if (!currentPdfDoc) {
+        loadAndDisplayCvPdf();
+      }
     });
-  });
+  }
 
-  // Modal Toolbar: Direct Download button
-  if (btnModalDirectDownload) {
-    btnModalDirectDownload.addEventListener('click', () => {
-      triggerGuaranteedDownload();
-      const origText = btnModalDirectDownload.innerHTML;
-      btnModalDirectDownload.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Downloading...';
+  // Zoom In
+  if (btnPdfZoomIn) {
+    btnPdfZoomIn.addEventListener('click', () => {
+      if (currentPdfScale < 2.5) {
+        currentPdfScale += 0.2;
+        renderPdfDocument(currentPdfScale);
+      }
+    });
+  }
+
+  // Zoom Out
+  if (btnPdfZoomOut) {
+    btnPdfZoomOut.addEventListener('click', () => {
+      if (currentPdfScale > 0.6) {
+        currentPdfScale -= 0.2;
+        renderPdfDocument(currentPdfScale);
+      }
+    });
+  }
+
+  // Reset Zoom
+  if (btnPdfZoomReset) {
+    btnPdfZoomReset.addEventListener('click', () => {
+      currentPdfScale = 1.25;
+      renderPdfDocument(currentPdfScale);
+    });
+  }
+
+  // Modal Toolbar: "Save to Local Disk" visual feedback with debounce (prevent double click)
+  let isDownloading = false;
+  if (btnModalNewTab) {
+    btnModalNewTab.addEventListener('click', () => {
+      if (isDownloading) return;
+      isDownloading = true;
+
+      const origHtml = btnModalNewTab.innerHTML;
+      btnModalNewTab.innerHTML = '<i class="fas fa-check text-success me-1"></i> Downloading...';
       setTimeout(() => {
-        btnModalDirectDownload.innerHTML = '<i class="fas fa-check text-success me-1"></i> Saved!';
+        btnModalNewTab.innerHTML = '<i class="fas fa-check-double text-success me-1"></i> Saved!';
         setTimeout(() => {
-          btnModalDirectDownload.innerHTML = origText;
-        }, 2000);
+          btnModalNewTab.innerHTML = origHtml;
+          isDownloading = false;
+        }, 1500);
       }, 1000);
     });
   }

@@ -64,19 +64,19 @@ app.get('/api/cv-data', (req, res) => {
   }
 });
 
-// Explicit CV route handler for any direct link
+// Explicit CV route handler for inline PDF previewing in browsers and iframes
 app.get('/cv/:filename', (req, res) => {
   const requestedPath = path.join(__dirname, 'cv', req.params.filename);
   if (fs.existsSync(requestedPath)) {
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="${req.params.filename}"`);
-    res.download(requestedPath, req.params.filename);
+    res.setHeader('Content-Disposition', `inline; filename="${req.params.filename}"`);
+    res.sendFile(requestedPath);
   } else {
     const cvInfo = getUploadedCvFile();
     if (cvInfo && fs.existsSync(cvInfo.path)) {
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `attachment; filename="${cvInfo.filename}"`);
-      res.download(cvInfo.path, cvInfo.filename);
+      res.setHeader('Content-Disposition', `inline; filename="${cvInfo.filename}"`);
+      res.sendFile(cvInfo.path);
     } else {
       res.status(404).send('CV file not found');
     }
@@ -88,6 +88,7 @@ app.use(express.static(__dirname, {
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.pdf')) {
       res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'inline');
     }
   }
 }));
