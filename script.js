@@ -1150,5 +1150,241 @@ Available Commands:
       window.open('https://tryhackme.com/p/murad734137', '_blank', 'noopener,noreferrer');
     });
   }
+
+  // ==========================================================================
+  // SKILLS CATEGORY FILTERING
+  // ==========================================================================
+  const skillFilterBtns = document.querySelectorAll('.skill-filter-btn');
+  const skillCategoryCols = document.querySelectorAll('.skill-category-card-col');
+
+  skillFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      skillFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-skill-filter');
+
+      skillCategoryCols.forEach(col => {
+        const category = col.getAttribute('data-skill-category');
+        if (filterValue === 'all' || category === filterValue) {
+          col.classList.remove('is-hidden');
+        } else {
+          col.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+
+  // ==========================================================================
+  // FULLSCREEN CYBER IMAGE LIGHTBOX CONTROLLER
+  // ==========================================================================
+  const galleryItems = [
+    {
+      src: './profile/muraduzzamanasha.jpg?v=2026',
+      title: 'Muraduzzaman Asha — Cyber Security Specialist & Threat Hunter',
+      badge: 'PRIMARY PROFILE',
+      subtext: 'B.Sc. in ICT (MBSTU) • Offensive Security & SOC Specialist'
+    },
+    {
+      src: './profile/IMG_20260111_223847.jpg?v=2026',
+      title: 'HackerOne Bug Hunt 2026 Bangladesh',
+      badge: 'BUG BOUNTY BANGLADESH',
+      subtext: 'Onsite Security Collaboration & Bug Bounty Community Meetup 2026'
+    },
+    {
+      src: './profile/IMG_20260627_220541.jpg?v=2026',
+      title: 'Phoenix Cyber Security Summit Dhaka 2026',
+      badge: 'NATIONAL SUMMIT 2026',
+      subtext: 'National Cyber Security Convention & Threat Intelligence Forum'
+    },
+    {
+      src: './profile/IMG-20260124-WA0000.jpg?v=2026',
+      title: 'Outdoor Expedition & Field Activities',
+      badge: 'FIELD EXPEDITION',
+      subtext: 'Team Leadership, Resilience & Outdoor Strategic Activities'
+    }
+  ];
+
+  let activeLightboxIndex = 0;
+  const imageLightboxModalEl = document.getElementById('imageLightboxModal');
+  let imageLightboxModal = null;
+  if (imageLightboxModalEl && typeof bootstrap !== 'undefined') {
+    imageLightboxModal = new bootstrap.Modal(imageLightboxModalEl);
+  }
+
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxBadge = document.getElementById('lightboxBadge');
+  const lightboxSubtext = document.getElementById('lightboxSubtext');
+  const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+  const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+
+  function openLightboxAtIndex(index) {
+    if (index < 0) index = galleryItems.length - 1;
+    if (index >= galleryItems.length) index = 0;
+    activeLightboxIndex = index;
+
+    const item = galleryItems[activeLightboxIndex];
+    if (lightboxImage) lightboxImage.src = item.src;
+    if (lightboxCaption) lightboxCaption.textContent = item.title;
+    if (lightboxBadge) lightboxBadge.textContent = item.badge;
+    if (lightboxSubtext) {
+      lightboxSubtext.innerHTML = `<i class="fas fa-shield-alt text-cyan me-1"></i> ${item.subtext}`;
+    }
+
+    if (imageLightboxModal) {
+      imageLightboxModal.show();
+    }
+  }
+
+  if (lightboxPrevBtn) {
+    lightboxPrevBtn.addEventListener('click', () => {
+      openLightboxAtIndex(activeLightboxIndex - 1);
+    });
+  }
+
+  if (lightboxNextBtn) {
+    lightboxNextBtn.addEventListener('click', () => {
+      openLightboxAtIndex(activeLightboxIndex + 1);
+    });
+  }
+
+  // Keyboard navigation for Lightbox
+  document.addEventListener('keydown', (e) => {
+    if (imageLightboxModalEl && imageLightboxModalEl.classList.contains('show')) {
+      if (e.key === 'ArrowLeft') {
+        openLightboxAtIndex(activeLightboxIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        openLightboxAtIndex(activeLightboxIndex + 1);
+      }
+    }
+  });
+
+  // Attach Lightbox triggers to HUD profile photo
+  const hudOpenLightboxBtn = document.getElementById('hudOpenLightboxBtn');
+  if (hudOpenLightboxBtn) {
+    hudOpenLightboxBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightboxAtIndex(currentSlideIndex || 0);
+    });
+  }
+
+  // Attach Lightbox triggers to CTF event gallery images
+  const ctfGalleryWrappers = document.querySelectorAll('.ctf-gallery-img-wrapper');
+  ctfGalleryWrappers.forEach((wrapper, idx) => {
+    wrapper.addEventListener('click', () => {
+      // 0 -> HackerOne (index 1), 1 -> Phoenix Summit (index 2)
+      openLightboxAtIndex(idx + 1);
+    });
+  });
+
+  // ==========================================================================
+  // 17. CYBERNETIC MOUSE CURSOR CONTROLLER
+  // ==========================================================================
+  const cursorDot = document.getElementById('cyberCursorDot');
+  const cursorRing = document.getElementById('cyberCursorRing');
+
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let isInitialized = false;
+
+    // Fast coordinate tracking
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!isInitialized) {
+        ringX = mouseX;
+        ringY = mouseY;
+        isInitialized = true;
+        cursorDot.classList.remove('is-hidden');
+        cursorRing.classList.remove('is-hidden');
+      }
+
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+    }, { passive: true });
+
+    // Smooth physics loop for the trailing ring
+    function renderCursor() {
+      if (isInitialized) {
+        // Fluid lerp interpolation
+        ringX += (mouseX - ringX) * 0.22;
+        ringY += (mouseY - ringY) * 0.22;
+        
+        cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      }
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
+
+    // Mouse press (click) reactions
+    window.addEventListener('mousedown', () => {
+      cursorDot.classList.add('is-clicking');
+      cursorRing.classList.add('is-clicking');
+    });
+
+    window.addEventListener('mouseup', () => {
+      cursorDot.classList.remove('is-clicking');
+      cursorRing.classList.remove('is-clicking');
+    });
+
+    // Window boundary events
+    document.addEventListener('mouseleave', () => {
+      cursorDot.classList.add('is-hidden');
+      cursorRing.classList.add('is-hidden');
+    });
+
+    document.addEventListener('mouseenter', () => {
+      cursorDot.classList.remove('is-hidden');
+      cursorRing.classList.remove('is-hidden');
+    });
+
+    // Interactive element hover detection
+    const interactiveSelectors = [
+      'a',
+      'button',
+      'input',
+      'textarea',
+      'select',
+      '.btn',
+      '.tech-chip',
+      '.skill-pill-btn',
+      '.project-card',
+      '.skill-card',
+      '.achievement-card',
+      '.mitre-technique-pill',
+      '.soc-alert-item',
+      '.hud-slide-nav-btn',
+      '.hud-dot',
+      '.ctf-gallery-img-wrapper',
+      '[role="button"]',
+      '[data-bs-toggle]'
+    ].join(',');
+
+    function attachCursorHoverListeners() {
+      const targets = document.querySelectorAll(interactiveSelectors);
+      targets.forEach((el) => {
+        el.addEventListener('mouseenter', () => {
+          cursorDot.classList.add('is-hovering');
+          cursorRing.classList.add('is-hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorDot.classList.remove('is-hovering');
+          cursorRing.classList.remove('is-hovering');
+        });
+      });
+    }
+
+    attachCursorHoverListeners();
+
+    // Re-attach listeners for dynamically rendered items
+    const observer = new MutationObserver(() => {
+      attachCursorHoverListeners();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
 });
 

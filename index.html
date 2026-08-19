@@ -155,7 +155,7 @@
             <div class="col-lg-7">
               <div class="hero-tagline-bar">
                 <i class="fas fa-shield-alt text-cyan"></i>
-                <span>[ CYBER SECURITY / SOC / SECURITY ENGINEERING ]</span>
+                <span>[ CYBER SECURITY / BLUE TEAM / SOC / SECURITY ENGINEERING ]</span>
               </div>
 
               <h1 class="hero-main-title">MURADUZZAMAN ASHA</h1>
@@ -255,6 +255,9 @@
                     <i class="fas fa-user-shield text-cyan"></i>
                     <span id="hudBadgeText">OPERATOR: MURADUZZAMAN</span>
                   </div>
+                  <button type="button" class="hud-lightbox-trigger-btn" id="hudOpenLightboxBtn" title="Inspect Fullscreen Photo">
+                    <i class="fas fa-expand-alt me-1"></i> Fullscreen
+                  </button>
 
                   <!-- Manual Navigation & Indicators -->
                   <div class="hud-slider-controls">
@@ -592,7 +595,7 @@
            ========================================================================== -->
       <section id="skills" class="skills-section">
         <div class="container">
-          <div class="text-center mb-5">
+          <div class="text-center mb-4">
             <span class="section-tag">Security Arsenal</span>
             <h2 class="section-title">TECHNICAL SECURITY STACK</h2>
             <p class="section-description mx-auto">
@@ -600,9 +603,31 @@
             </p>
           </div>
 
-          <div class="row g-4">
+          <!-- Interactive Category Filter Tabs -->
+          <div class="skills-filter-container">
+            <button type="button" class="skill-filter-btn active" data-skill-filter="all">
+              <i class="fas fa-th-large me-1 text-cyan"></i> All Stack
+            </button>
+            <button type="button" class="skill-filter-btn" data-skill-filter="soc">
+              <i class="fas fa-shield-alt me-1 text-teal"></i> SOC & SIEM
+            </button>
+            <button type="button" class="skill-filter-btn" data-skill-filter="web">
+              <i class="fas fa-globe me-1 text-cyan"></i> Web & API Security
+            </button>
+            <button type="button" class="skill-filter-btn" data-skill-filter="network">
+              <i class="fas fa-network-wired me-1 text-cyan"></i> Network & Protocols
+            </button>
+            <button type="button" class="skill-filter-btn" data-skill-filter="offensive">
+              <i class="fas fa-crosshairs me-1 text-danger"></i> Offensive & Lab
+            </button>
+            <button type="button" class="skill-filter-btn" data-skill-filter="scripting">
+              <i class="fas fa-code me-1 text-success"></i> Scripting & OS
+            </button>
+          </div>
+
+          <div class="row g-4" id="skillsGridContainer">
             <!-- 1. Offensive Security -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 skill-category-card-col" data-skill-category="offensive">
               <div class="skill-category-card">
                 <div class="skill-category-header">
                   <div class="skill-category-icon">
@@ -626,7 +651,7 @@
             </div>
 
             <!-- 2. Blue Team & SOC -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 skill-category-card-col" data-skill-category="soc">
               <div class="skill-category-card" style="border-color: rgba(56, 189, 248, 0.35);">
                 <div class="skill-category-header">
                   <div class="skill-category-icon" style="background: rgba(34, 211, 238, 0.15); color: var(--cyber-teal);">
@@ -649,7 +674,7 @@
             </div>
 
             <!-- 3. Web & API Security -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 skill-category-card-col" data-skill-category="web">
               <div class="skill-category-card">
                 <div class="skill-category-header">
                   <div class="skill-category-icon">
@@ -672,7 +697,7 @@
             </div>
 
             <!-- 4. Networking & Protocols -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 skill-category-card-col" data-skill-category="network">
               <div class="skill-category-card">
                 <div class="skill-category-header">
                   <div class="skill-category-icon">
@@ -697,7 +722,7 @@
             </div>
 
             <!-- 5. Operating Systems & Lab Env -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 skill-category-card-col" data-skill-category="scripting">
               <div class="skill-category-card">
                 <div class="skill-category-header">
                   <div class="skill-category-icon">
@@ -719,7 +744,7 @@
             </div>
 
             <!-- 6. Scripting & Automation -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 skill-category-card-col" data-skill-category="scripting">
               <div class="skill-category-card">
                 <div class="skill-category-header">
                   <div class="skill-category-icon">
@@ -759,27 +784,50 @@
           <div class="row g-4">
             <!-- Project 01: CyberJobBot -->
             <div class="col-lg-6">
-              <div class="project-card">
+              <div class="project-card h-100 d-flex flex-column justify-content-between">
                 <div>
                   <div class="project-top-meta">
                     <span class="project-num">PROJECT_01</span>
                     <span class="project-cat-badge">Automation & Intelligence</span>
                   </div>
                   <h3 class="project-title">CyberJobBot</h3>
-                  <p class="project-desc">
-                    A PowerShell-based cybersecurity threat intelligence and career monitoring daemon that autonomously collects security role postings, parses structured metadata, executes regex-based relevance scoring (SOC, Pentest, SIEM), prevents duplicate alerts via hash comparison, and dispatches real-time alerts via Telegram Bot API.
-                  </p>
-                  <div class="project-tech-stack">
-                    <span class="tech-chip">PowerShell</span>
-                    <span class="tech-chip">Telegram API</span>
-                    <span class="tech-chip">JSON Parsing</span>
-                    <span class="tech-chip">RegEx Filtering</span>
-                    <span class="tech-chip">Relevance Scoring</span>
-                    <span class="tech-chip">Deduplication</span>
+                  
+                  <!-- 3-Point Specification Block -->
+                  <div class="project-spec-grid">
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-danger">
+                        <i class="fas fa-bullseye me-1"></i> Core Threat / Problem
+                      </div>
+                      <p class="project-spec-body">
+                        Manual monitoring of emerging cybersecurity openings and threat feed intelligence is slow and noisy, leading to missed opportunities and redundant alert floods.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-cyan">
+                        <i class="fas fa-shield-alt me-1"></i> Security Implementation
+                      </div>
+                      <p class="project-spec-body">
+                        PowerShell daemon executing automated endpoint scraping, regex relevance scoring (SOC, Pentest, SIEM), SHA256 deduplication hashing, and real-time Telegram Bot alerts.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-success">
+                        <i class="fas fa-microchip me-1"></i> Key Tools & Stack
+                      </div>
+                      <div class="project-tech-stack">
+                        <span class="tech-chip">PowerShell</span>
+                        <span class="tech-chip">Telegram API</span>
+                        <span class="tech-chip">RegEx Parsing</span>
+                        <span class="tech-chip">SHA-256 Hash</span>
+                        <span class="tech-chip">Cron Daemon</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="project-actions">
+                <div class="project-actions mt-3">
                   <a href="https://github.com/Murad734138/CyberJobBot" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
                     <i class="fab fa-github"></i> GitHub
                   </a>
@@ -792,28 +840,51 @@
 
             <!-- Project 02: THM & VulnHub Security Lab Portfolio -->
             <div class="col-lg-6">
-              <div class="project-card">
+              <div class="project-card h-100 d-flex flex-column justify-content-between">
                 <div>
                   <div class="project-top-meta">
                     <span class="project-num">PROJECT_02</span>
                     <span class="project-cat-badge">Offensive Labs & Pentesting</span>
                   </div>
                   <h3 class="project-title">TryHackMe & VulnHub Security Lab Portfolio</h3>
-                  <p class="project-desc">
-                    Extensive hands-on offensive security portfolio spanning 120+ rooms and vulnerable VMs covering network enumeration, service reconnaissance, vulnerability identification, web exploitation (OWASP Top 10), Linux/Windows privilege escalation, and structured technical reporting with remediation blueprints.
-                  </p>
-                  <div class="project-tech-stack">
-                    <span class="tech-chip">120+ THM Rooms</span>
-                    <span class="tech-chip">Burp Suite</span>
-                    <span class="tech-chip">Nmap</span>
-                    <span class="tech-chip">LinPEAS</span>
-                    <span class="tech-chip">Metasploit</span>
-                    <span class="tech-chip">PrivEsc</span>
-                    <span class="tech-chip">OWASP</span>
+                  
+                  <!-- 3-Point Specification Block -->
+                  <div class="project-spec-grid">
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-danger">
+                        <i class="fas fa-bullseye me-1"></i> Core Threat / Problem
+                      </div>
+                      <p class="project-spec-body">
+                        Vulnerabilities across web endpoints, misconfigured Linux permissions, and unpatched network services remain the primary vectors for initial compromise and lateral movement.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-cyan">
+                        <i class="fas fa-shield-alt me-1"></i> Security Implementation
+                      </div>
+                      <p class="project-spec-body">
+                        Solved 120+ rooms executing web penetration testing (OWASP Top 10), SUID/cron privilege escalation, service exploitation, and structured remediation writeups.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-success">
+                        <i class="fas fa-microchip me-1"></i> Key Tools & Stack
+                      </div>
+                      <div class="project-tech-stack">
+                        <span class="tech-chip">Burp Suite</span>
+                        <span class="tech-chip">Nmap</span>
+                        <span class="tech-chip">LinPEAS</span>
+                        <span class="tech-chip">Metasploit</span>
+                        <span class="tech-chip">SQLMap</span>
+                        <span class="tech-chip">Gobuster</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="project-actions">
+                <div class="project-actions mt-3">
                   <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
                     <i class="fab fa-github"></i> Writeups
                   </a>
@@ -826,27 +897,50 @@
 
             <!-- Project 03: Home Penetration Testing Lab -->
             <div class="col-lg-6">
-              <div class="project-card">
+              <div class="project-card h-100 d-flex flex-column justify-content-between">
                 <div>
                   <div class="project-top-meta">
                     <span class="project-num">PROJECT_03</span>
                     <span class="project-cat-badge">Virtual Lab Architecture</span>
                   </div>
                   <h3 class="project-title">Home Penetration Testing & Defense Lab</h3>
-                  <p class="project-desc">
-                    Isolated multi-host virtual cybersecurity lab environment architected for safe exploitation testing, network pivot simulations, packet capture inspection, and defensive log analysis across isolated Kali Linux attack machines and vulnerable Windows/Linux targets.
-                  </p>
-                  <div class="project-tech-stack">
-                    <span class="tech-chip">Kali Linux</span>
-                    <span class="tech-chip">Ubuntu Server</span>
-                    <span class="tech-chip">Windows VMs</span>
-                    <span class="tech-chip">VirtualBox / VMware</span>
-                    <span class="tech-chip">Wireshark</span>
-                    <span class="tech-chip">Host Isolation</span>
+                  
+                  <!-- 3-Point Specification Block -->
+                  <div class="project-spec-grid">
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-danger">
+                        <i class="fas fa-bullseye me-1"></i> Core Threat / Problem
+                      </div>
+                      <p class="project-spec-body">
+                        Testing exploits and simulating adversarial attacks on unsegmented networks risks catastrophic production outages and data destruction.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-cyan">
+                        <i class="fas fa-shield-alt me-1"></i> Security Implementation
+                      </div>
+                      <p class="project-spec-body">
+                        Engineered isolated multi-host virtual environment separating Kali Linux attack nodes from Windows/Ubuntu target VMs with packet inspection tap and defensive syslog collectors.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-success">
+                        <i class="fas fa-microchip me-1"></i> Key Tools & Stack
+                      </div>
+                      <div class="project-tech-stack">
+                        <span class="tech-chip">Kali Linux</span>
+                        <span class="tech-chip">Ubuntu Server</span>
+                        <span class="tech-chip">VirtualBox / VMware</span>
+                        <span class="tech-chip">Wireshark</span>
+                        <span class="tech-chip">VLAN Isolation</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="project-actions">
+                <div class="project-actions mt-3">
                   <a href="https://github.com/Murad734138" target="_blank" rel="noopener noreferrer" class="btn btn-cyber-primary btn-sm">
                     <i class="fab fa-github"></i> Lab Specs
                   </a>
@@ -859,27 +953,50 @@
 
             <!-- Project 04: Malicious Package Detection Research -->
             <div class="col-lg-6">
-              <div class="project-card">
+              <div class="project-card h-100 d-flex flex-column justify-content-between">
                 <div>
                   <div class="project-top-meta">
                     <span class="project-num">PROJECT_04</span>
                     <span class="project-cat-badge">Software Supply Chain Security</span>
                   </div>
                   <h3 class="project-title">Malicious Package Detection Research</h3>
-                  <p class="project-desc">
-                    Undergraduate capstone research investigating machine learning and static code analysis pipelines to identify poisoned open-source dependencies (npm, PyPI) exhibiting obfuscated payloads, suspicious network beacons, or typosquatting behaviors.
-                  </p>
-                  <div class="project-tech-stack">
-                    <span class="tech-chip">Python</span>
-                    <span class="tech-chip">Static Analysis</span>
-                    <span class="tech-chip">AST Parsing</span>
-                    <span class="tech-chip">Machine Learning</span>
-                    <span class="tech-chip">Malware Heuristics</span>
-                    <span class="tech-chip">Research</span>
+                  
+                  <!-- 3-Point Specification Block -->
+                  <div class="project-spec-grid">
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-danger">
+                        <i class="fas fa-bullseye me-1"></i> Core Threat / Problem
+                      </div>
+                      <p class="project-spec-body">
+                        Modern applications heavily depend on open-source registries (npm, PyPI) where attackers inject typosquatted packages with obfuscated backdoors and reverse shells.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-cyan">
+                        <i class="fas fa-shield-alt me-1"></i> Security Implementation
+                      </div>
+                      <p class="project-spec-body">
+                        Developed AST-based static code analyzers extracting suspicious network sockets, entropy anomalies, eval/exec obfuscation patterns, and trained classification heuristics.
+                      </p>
+                    </div>
+
+                    <div class="project-spec-box">
+                      <div class="project-spec-header text-success">
+                        <i class="fas fa-microchip me-1"></i> Key Tools & Stack
+                      </div>
+                      <div class="project-tech-stack">
+                        <span class="tech-chip">Python</span>
+                        <span class="tech-chip">AST Parsing</span>
+                        <span class="tech-chip">Static Analysis</span>
+                        <span class="tech-chip">Entropy Scoring</span>
+                        <span class="tech-chip">Typosquatting Detection</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="project-actions">
+                <div class="project-actions mt-3">
                   <a href="#research" class="btn btn-cyber-primary btn-sm">
                     <i class="fas fa-book-reader"></i> Research Section
                   </a>
@@ -1079,12 +1196,44 @@
            ========================================================================== -->
       <section id="ctf" class="ctf-section">
         <div class="container">
-          <div class="text-center mb-5">
+          <div class="text-center mb-4">
             <span class="section-tag">Competition Record</span>
             <h2 class="section-title">CTF & COMPETITION RECORD</h2>
             <p class="section-description mx-auto">
               Competitive cybersecurity accomplishments solving real-time security challenges under time constraints in national hackathons and CTF arenas.
             </p>
+          </div>
+
+          <!-- Modern Cyber Metrics Ribbon -->
+          <div class="row g-3 mb-5">
+            <div class="col-6 col-md-3">
+              <div class="ctf-metric-card">
+                <div class="ctf-metric-icon text-cyan"><i class="fas fa-globe"></i></div>
+                <div class="ctf-metric-num text-cyan">TOP 3%</div>
+                <div class="ctf-metric-label">Global Standing</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="ctf-metric-card">
+                <div class="ctf-metric-icon text-success"><i class="fas fa-check-double"></i></div>
+                <div class="ctf-metric-num text-success">120+</div>
+                <div class="ctf-metric-label">Completed Rooms</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="ctf-metric-card">
+                <div class="ctf-metric-icon text-warning"><i class="fas fa-bolt"></i></div>
+                <div class="ctf-metric-num text-warning">2,800+</div>
+                <div class="ctf-metric-label">Verified Points</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="ctf-metric-card">
+                <div class="ctf-metric-icon text-teal"><i class="fas fa-shield-alt"></i></div>
+                <div class="ctf-metric-num text-teal">15+</div>
+                <div class="ctf-metric-label">Security Badges</div>
+              </div>
+            </div>
           </div>
 
           <div class="row g-4">
@@ -2049,6 +2198,53 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ==========================================================================
+         CYBER IMAGE FULLSCREEN LIGHTBOX MODAL
+         ========================================================================== -->
+    <div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-labelledby="lightboxCaption" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content modal-cyber-content" style="background: rgba(11, 17, 32, 0.98); border: 1px solid var(--cyber-cyan); box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);">
+          <div class="modal-cyber-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+              <span id="lightboxBadge" class="badge bg-primary text-white font-mono">EVENT INSPECTOR</span>
+              <h3 class="modal-title h6 text-bright font-mono mb-0" id="lightboxCaption">Cyber Photo Inspection</h3>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-cyber-body p-2 text-center position-relative">
+            <div class="lightbox-img-frame d-flex align-items-center justify-content-center" style="min-height: 480px; max-height: 75vh; overflow: hidden; background: #000; border-radius: 6px;">
+              <img id="lightboxImage" src="" alt="Fullscreen Cyber Security Event" class="img-fluid rounded" style="max-height: 72vh; object-fit: contain;" />
+            </div>
+            <div class="d-flex flex-wrap justify-content-between align-items-center mt-3 px-2 gap-2">
+              <span class="text-secondary small font-mono" id="lightboxSubtext">
+                <i class="fas fa-shield-alt text-cyan me-1"></i> Verified Security Event Record
+              </span>
+              <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-cyber-outline btn-sm font-mono" id="lightboxPrevBtn">
+                  <i class="fas fa-chevron-left me-1"></i> Prev
+                </button>
+                <button type="button" class="btn btn-cyber-outline btn-sm font-mono" id="lightboxNextBtn">
+                  Next <i class="fas fa-chevron-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         CYBERNETIC RETICLE MOUSE CURSOR
+         ========================================================================== -->
+    <div id="cyberCursorDot" class="cyber-cursor-dot" aria-hidden="true"></div>
+    <div id="cyberCursorRing" class="cyber-cursor-ring" aria-hidden="true">
+      <div class="cursor-crosshair ch-top"></div>
+      <div class="cursor-crosshair ch-bottom"></div>
+      <div class="cursor-crosshair ch-left"></div>
+      <div class="cursor-crosshair ch-right"></div>
+      <div class="cursor-center-bracket"></div>
     </div>
 
     <!-- Bootstrap 5 Bundle JS -->

@@ -2618,3 +2618,478 @@ a:hover {
   border-color: #38bdf8 !important;
   background-color: rgba(56, 189, 248, 0.15) !important;
 }
+
+/* ==========================================================================
+   INTERACTIVE SKILLS FILTER BUTTONS & ANIMATION
+   ========================================================================== */
+.skills-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.skill-filter-btn {
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.skill-filter-btn:hover {
+  color: var(--text-bright);
+  border-color: var(--cyber-cyan);
+  background: rgba(56, 189, 248, 0.12);
+  transform: translateY(-1px);
+}
+
+.skill-filter-btn.active {
+  background: var(--cyber-cyan);
+  color: #070c16;
+  border-color: var(--cyber-cyan);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+
+.skill-category-card-col {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-category-card-col.is-hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   PROJECT 3-POINT STRUCTURED ARCHITECTURE CARDS
+   ========================================================================== */
+.project-spec-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 18px 0;
+}
+
+.project-spec-box {
+  background: rgba(11, 17, 32, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  border-radius: 6px;
+  padding: 10px 12px;
+  transition: all 0.2s ease;
+}
+
+.project-spec-box:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.project-spec-header {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.project-spec-body {
+  color: #94a3b8;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   CTF MODERN METRIC CARDS
+   ========================================================================== */
+.ctf-metric-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 18px 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctf-metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyber-cyan), transparent);
+  opacity: 0.4;
+}
+
+.ctf-metric-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.15);
+}
+
+.ctf-metric-card:hover::before {
+  opacity: 1;
+}
+
+.ctf-metric-icon {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.ctf-metric-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.ctf-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   CYBER LIGHTBOX & PHOTO TRIGGER OVERLAY
+   ========================================================================== */
+.hud-image-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.hud-lightbox-trigger-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(7, 12, 22, 0.85);
+  border: 1px solid var(--cyber-cyan);
+  color: var(--cyber-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 15;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+  pointer-events: auto;
+}
+
+.hud-lightbox-trigger-btn:hover {
+  background: var(--cyber-cyan);
+  color: #070c16;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.ctf-gallery-img-wrapper {
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+}
+
+.ctf-gallery-img-wrapper:hover {
+  border-color: var(--cyber-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
+}
+
+.ctf-gallery-img-wrapper::after {
+  content: '\f00e  Click for Fullscreen';
+  font-family: 'Font Awesome 5 Free', var(--font-mono);
+  font-weight: 900;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--cyber-cyan);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.ctf-gallery-img-wrapper:hover::after {
+  opacity: 1;
+}
+
+.lightbox-img-frame img {
+  user-select: none;
+  -webkit-user-drag: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive Polish */
+@media (max-width: 768px) {
+  .skills-filter-container {
+    gap: 6px;
+  }
+  .skill-filter-btn {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+  .ctf-metric-num {
+    font-size: 1.25rem;
+  }
+  .project-spec-body {
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   VISUAL-FIRST CYBER TAGS & COMPACT CAPSULES
+   ========================================================================== */
+.hero-visual-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 20px 0;
+}
+
+.hero-visual-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-accent);
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-bright);
+  transition: all 0.25s ease;
+}
+
+.hero-visual-tag:hover {
+  border-color: var(--cyber-cyan);
+  background: rgba(56, 189, 248, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+}
+
+.about-visual-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.about-visual-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(11, 17, 32, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.about-visual-badge:hover {
+  border-color: var(--cyber-cyan);
+  transform: translateY(-2px);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.about-badge-icon {
+  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--cyber-cyan);
+  flex-shrink: 0;
+}
+
+.about-badge-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.2;
+}
+
+.about-badge-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   CYBERNETIC RETICLE MOUSE CURSOR DESIGN
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  /* Hide standard operating system / browser cursor */
+  *, *::before, *::after, html, body, a, button, input, textarea, select, [role="button"] {
+    cursor: none !important;
+  }
+
+  /* Fast Precision Central Dot */
+  .cyber-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--cyber-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.9), 0 0 20px rgba(56, 189, 248, 0.4);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    will-change: transform;
+  }
+
+  .cyber-cursor-dot.is-hovering {
+    width: 8px;
+    height: 8px;
+    background-color: #38BDF8;
+    box-shadow: 0 0 14px #38BDF8;
+  }
+
+  .cyber-cursor-dot.is-clicking {
+    width: 5px;
+    height: 5px;
+    background-color: var(--cyber-green);
+    box-shadow: 0 0 12px var(--cyber-green);
+  }
+
+  /* Smooth Trailing Tactical Scanner Ring */
+  .cyber-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(56, 189, 248, 0.45);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+                height 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 0.2s ease,
+                background-color 0.2s ease,
+                transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+                opacity 0.25s ease;
+    will-change: transform;
+  }
+
+  /* 4 Tactical Crosshairs on the Ring */
+  .cyber-cursor-ring .cursor-crosshair {
+    position: absolute;
+    background: var(--cyber-cyan);
+    pointer-events: none;
+    transition: all 0.2s ease;
+    opacity: 0.75;
+  }
+
+  .cyber-cursor-ring .ch-top {
+    top: -5px;
+    left: 50%;
+    width: 1.5px;
+    height: 5px;
+    transform: translateX(-50%);
+  }
+
+  .cyber-cursor-ring .ch-bottom {
+    bottom: -5px;
+    left: 50%;
+    width: 1.5px;
+    height: 5px;
+    transform: translateX(-50%);
+  }
+
+  .cyber-cursor-ring .ch-left {
+    top: 50%;
+    left: -5px;
+    width: 5px;
+    height: 1.5px;
+    transform: translateY(-50%);
+  }
+
+  .cyber-cursor-ring .ch-right {
+    top: 50%;
+    right: -5px;
+    width: 5px;
+    height: 1.5px;
+    transform: translateY(-50%);
+  }
+
+  /* Hover State (Target Acquired Mode) */
+  .cyber-cursor-ring.is-hovering {
+    width: 50px;
+    height: 50px;
+    border-color: #38BDF8;
+    background: rgba(56, 189, 248, 0.08);
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.35), inset 0 0 10px rgba(56, 189, 248, 0.15);
+    animation: cursorPulseReticle 2.5s infinite linear;
+  }
+
+  .cyber-cursor-ring.is-hovering .cursor-crosshair {
+    opacity: 1;
+    background: #38BDF8;
+    box-shadow: 0 0 6px #38BDF8;
+  }
+
+  /* Click State (Engagement / Trigger Mode) */
+  .cyber-cursor-ring.is-clicking {
+    width: 28px;
+    height: 28px;
+    border-color: var(--cyber-green);
+    background: rgba(34, 197, 94, 0.15);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+  }
+
+  .cyber-cursor-ring.is-clicking .cursor-crosshair {
+    background: var(--cyber-green);
+  }
+
+  .cyber-cursor-dot.is-hidden,
+  .cyber-cursor-ring.is-hidden {
+    opacity: 0;
+  }
+}
+
+@keyframes cursorPulseReticle {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Hide custom cursor on mobile / non-mouse devices */
+@media (hover: none) or (pointer: coarse) {
+  .cyber-cursor-dot,
+  .cyber-cursor-ring {
+    display: none !important;
+  }
+}
+
