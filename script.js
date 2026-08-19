@@ -685,7 +685,7 @@ Available Commands:
   const ctfVerifyBtn = document.getElementById('ctfVerifyFlagBtn');
   const ctfInput = document.getElementById('ctfFlagInput');
   const ctfResult = document.getElementById('ctfResultBadge');
-  const correctFlag = 'THM{MURAD_SECURITY_ENGINEER_DEV_2026}';
+  const correctFlag = 'MURAD{Thanks For Vist Me}';
 
   if (ctfDecodeBtn && ctfInput) {
     ctfDecodeBtn.addEventListener('click', () => {
